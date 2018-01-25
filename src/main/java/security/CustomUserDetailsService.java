@@ -9,18 +9,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import dao.UserRepository;
-import dao.UserRolesRepository;
 import entities.User;
+
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService{
 	private final UserRepository userRepository;
-	private final UserRolesRepository userRolesRepository;
+	
 	
 	@Autowired
-    public CustomUserDetailsService(UserRepository userRepository,UserRolesRepository userRolesRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userRolesRepository=userRolesRepository;
     }
 	
         
@@ -30,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		if(null == user){
 			throw new UsernameNotFoundException("No user present with username: "+username);
 		}else{
-			List<String> userRoles=userRolesRepository.findRoleByUserName(username);
+			List<String> userRoles=userRepository.findRoleByUserName(username);
 			return new CustomUserDetails(user,userRoles);
 		}
 	}

@@ -38,7 +38,16 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private Collection<Commentaire> commentaires;
 
+    private String role;
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public User(){
 		
 	}
