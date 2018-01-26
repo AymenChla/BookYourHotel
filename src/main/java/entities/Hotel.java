@@ -18,14 +18,14 @@ public class Hotel{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idHotel;
-    private String nom;
+    private String nom_hotel;
     private Integer nbEtoiles;
-    private String adresse;
+    private String adresse_hotel;
     private Integer piscine;
     private boolean restaurant;
     private boolean parking;
     private boolean wifi;
-    private String describtion;
+    private String description_hotel;
     //ArrayList<Blob> images;
     private String numCarteBancaire;
    
@@ -42,14 +42,14 @@ public class Hotel{
     }
 
     public Hotel(String nom, Integer nbEtoiles, String adresse, Integer piscine, boolean restaurant, boolean parking, boolean wifi, String describtion,String numCarteBancaire, String email, String mdp, Date date_ajout) {
-        this.nom = nom;
+        this.setNom_hotel(nom);
         this.nbEtoiles = nbEtoiles;
-        this.adresse = adresse;
+        this.setAdresse_hotel(adresse);
         this.piscine = piscine;
         this.restaurant = restaurant;
         this.parking = parking;
         this.wifi = wifi;
-        this.describtion = describtion;
+        this.description_hotel = describtion;
        // this.images = images;
         this.numCarteBancaire = numCarteBancaire;
     }
@@ -62,14 +62,7 @@ public class Hotel{
         this.idHotel = idHotel;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
+    
     public Integer getNbEtoiles() {
         return nbEtoiles;
     }
@@ -78,13 +71,7 @@ public class Hotel{
         this.nbEtoiles = nbEtoiles;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
+    
 
     public Integer getPiscine() {
         return piscine;
@@ -118,13 +105,6 @@ public class Hotel{
         this.wifi = wifi;
     }
 
-    public String getDescribtion() {
-        return describtion;
-    }
-
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion;
-    }
 /*
     public ArrayList<Blob> getImages() {
         return images;
@@ -173,6 +153,30 @@ public class Hotel{
     public void setChambres(Collection<Chambre> chambres) {
         this.chambres = chambres;
     }
+
+	public String getNom_hotel() {
+		return nom_hotel;
+	}
+
+	public void setNom_hotel(String nom_hotel) {
+		this.nom_hotel = nom_hotel;
+	}
+
+	public String getAdresse_hotel() {
+		return adresse_hotel;
+	}
+
+	public void setAdresse_hotel(String adresse_hotel) {
+		this.adresse_hotel = adresse_hotel;
+	}
+
+	public String getDescription_hotel() {
+		return description_hotel;
+	}
+
+	public void setDescription_hotel(String description_hotel) {
+		this.description_hotel = description_hotel;
+	}
     
     
 }

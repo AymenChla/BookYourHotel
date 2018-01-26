@@ -15,13 +15,11 @@
 		<c:out value="${ offre.prix}"></c:out> : 
 		<c:out value="${ offre.chambre.description}"></c:out>
 		<c:out value="${ offre.chambre.hotel.nom_hotel }"></c:out>
-		<form action="/hebergements" method="POST">
-			<input type="hidden" name="id_hotel" value="<c:out value="${ offre.chambre.hotel.idHotel}"></c:out>">
-			<input type="hidden" name="date_d" value="<c:out value="${ date_d}"></c:out>" >
-			<input type="hidden" name="date_f" value="<c:out value="${ date_f}"></c:out>" >
-			<input type="submit" value="voir hebergements">
-			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-		</form>
+		<select name="nbChambres">
+			<c:forEach begin="1" end="${ nbChambres.get(offre.chambre.description) }" var="i">
+				<option><c:out value="${i}"></c:out></option>
+			</c:forEach>
+		</select>
 		<br>
 	</c:forEach>
 </body>

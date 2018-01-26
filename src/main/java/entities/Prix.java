@@ -1,6 +1,11 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -76,5 +81,42 @@ public class Prix {
         this.chambre = chambre;
     }
     
+    //supprime doublons des hotels
+    static public List<Prix> supprimerDoublonsHotel(List<Prix> offres)
+    {
+    	List<Long> instances = new ArrayList<Long>();
+    	
+    	for(int i=0 ; i < offres.size() ; i++)
+    	{
+    		if(instances.contains(offres.get(i).getChambre().getHotel().getIdHotel()))
+			{
+				offres.remove(i);
+			}
+    		else{
+    			instances.add(offres.get(i).getChambre().getHotel().getIdHotel());
+    		}
+    	   
+    	}
+    	return offres;
+    }
     
+  //supprime doublons des chambres (simple,double...)
+    static public List<Prix> supprimerDoublonsChambreCategorie(List<Prix> offres)
+    {
+    	List<String> instances = new ArrayList<String>();
+    	
+    	for(int i=0 ; i < offres.size() ; i++)
+    	{
+    		if(instances.contains(offres.get(i).getChambre().getDescription()))
+			{
+				offres.remove(i);
+			}
+    		else{
+    			instances.add(offres.get(i).getChambre().getDescription());
+    		}
+    	   
+    	}
+    	return offres;
+    }
+
 }

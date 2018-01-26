@@ -14,9 +14,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Long>{
 	public List<Hotel> getHotelsLikeAdresse(String adresse);
 	
 
-	@Query(value = "SELECT * FROM hotels WHERE adresse like %?1% and id_hotel in (select id_hotel from chambres c natural join reservations r where ?2 not BETWEEN r.date_debut_sejour and r.date_fin_sejour and ?3 not BETWEEN r.date_debut_sejour and r.date_fin_sejour group by id_hotel having count(id_hotel) >= ?4 ) ", nativeQuery = true)
-	public List<Hotel> getAvailableHotels(String adresse,String date_debut_sejour,String date_fin_sejour,Integer nbChambre);
-	
+	//les hotels qui correspondent a une destination et en au moins $nbchambre non réserver
+	@Query(value = "SELECT * FROM hotels WHERE adresse_hotel like %?1% and id_hotel in (select id_hotel from chambres c natural join reservations r where ?2 not BETWEEN r.date_debut_sejour and r.date_fin_sejour and ?3 not BETWEEN r.date_debut_sejour and r.date_fin_sejour group by id_hotel having count(id_hotel) >= ?4 ) ", nativeQuery = true)
+	public List<Hotel> getAvailableHotels(String adresses,String date_debut_sejour,String date_fin_sejour,Integer nbChambre);
 	
 	
 
