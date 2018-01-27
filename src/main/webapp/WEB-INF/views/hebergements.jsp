@@ -15,11 +15,21 @@
 		<c:out value="${ offre.prix}"></c:out> : 
 		<c:out value="${ offre.chambre.description}"></c:out>
 		<c:out value="${ offre.chambre.hotel.nom_hotel }"></c:out>
-		<select name="nbChambres">
-			<c:forEach begin="1" end="${ nbChambres.get(offre.chambre.description) }" var="i">
-				<option><c:out value="${i}"></c:out></option>
-			</c:forEach>
-		</select>
+		<form action="/reservation" method="git">
+			<select name="nbChambres">
+				<c:forEach begin="1" end="${ nbChambres.get(offre.chambre.description) }" var="i">
+					<option><c:out value="${i}"></c:out></option>
+				</c:forEach>
+			</select>
+			
+			<input type="hidden" name="categorie" value="${offre.chambre.description}">
+			<input type="hidden" name="nbChambre" value="${nbChambres.get(offre.chambre.description)}">
+			<input type="hidden" name="id_offre"  value="${offre.idPrix}">
+			 
+			<input type="submit" value="reserver">
+			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+		</form>
+		
 		<br>
 	</c:forEach>
 </body>

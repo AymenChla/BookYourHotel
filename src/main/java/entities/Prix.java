@@ -40,8 +40,16 @@ public class Prix {
         this.dateFin = dateFin;
         this.tauxReduction = tauxReduction;
     }
+    
+    public Long getIdPrix() {
+		return idPrix;
+	}
 
-    public Double getPrix() {
+	public void setIdPrix(Long idPrix) {
+		this.idPrix = idPrix;
+	}
+
+	public Double getPrix() {
         return prix;
     }
 
@@ -85,15 +93,17 @@ public class Prix {
     static public List<Prix> supprimerDoublonsHotel(List<Prix> offres)
     {
     	List<Long> instances = new ArrayList<Long>();
-    	
-    	for(int i=0 ; i < offres.size() ; i++)
+    	Iterator<Prix> i = offres.iterator();
+    	Prix offre;
+    	while(i.hasNext())
     	{
-    		if(instances.contains(offres.get(i).getChambre().getHotel().getIdHotel()))
+    		offre = i.next();
+    		if(instances.contains(offre.getChambre().getHotel().getIdHotel()))
 			{
-				offres.remove(i);
+				i.remove();
 			}
     		else{
-    			instances.add(offres.get(i).getChambre().getHotel().getIdHotel());
+    			instances.add(offre.getChambre().getHotel().getIdHotel());
     		}
     	   
     	}

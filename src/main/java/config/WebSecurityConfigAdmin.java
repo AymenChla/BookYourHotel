@@ -44,11 +44,12 @@ public class WebSecurityConfigAdmin extends WebSecurityConfigurerAdapter {
 		 
 		 http
 		 .authorizeRequests()
-		 .anyRequest().permitAll()
+		 //.anyRequest().permitAll()
 	     .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 	     .and()
 	     .authorizeRequests()
 	     .antMatchers("/client/**").access("hasRole('ROLE_CLIENT')")
+	     .antMatchers("/reservation").access("hasRole('ROLE_CLIENT')")
 	     .and()
 	     .formLogin().loginPage("/login").permitAll()
 	     .usernameParameter("username").passwordParameter("password")
