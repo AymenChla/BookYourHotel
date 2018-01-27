@@ -2,7 +2,7 @@
 package entities;
 
 import java.util.Collection;
-import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,16 +18,19 @@ public class Hotel{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idHotel;
-    private String nom;
+    private String nom_hotel;
     private Integer nbEtoiles;
-    private String adresse;
+    private String adresse_hotel;
     private Integer piscine;
     private boolean restaurant;
     private boolean parking;
     private boolean wifi;
-    private String describtion;
-    //ArrayList<Blob> images;
+    private String description;
+    private String image;
     private String numCarteBancaire;
+    
+    private boolean paiement;
+    private int annulation;
    
     @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
     private Collection<Gerant> gerants;
@@ -41,33 +44,40 @@ public class Hotel{
     public Hotel() {
     }
 
-    public Hotel(String nom, Integer nbEtoiles, String adresse, Integer piscine, boolean restaurant, boolean parking, boolean wifi, String describtion,String numCarteBancaire, String email, String mdp, Date date_ajout) {
-        this.nom = nom;
-        this.nbEtoiles = nbEtoiles;
-        this.adresse = adresse;
-        this.piscine = piscine;
-        this.restaurant = restaurant;
-        this.parking = parking;
-        this.wifi = wifi;
-        this.describtion = describtion;
-       // this.images = images;
-        this.numCarteBancaire = numCarteBancaire;
-    }
+    public Hotel(Long idHotel, String nom_hotel, Integer nbEtoiles,
+			String adresse_hotel, Integer piscine, boolean restaurant,
+			boolean parking, boolean wifi, String description, String image,
+			String numCarteBancaire, boolean paiement, int annulation) {
+		
+		this.idHotel = idHotel;
+		this.nom_hotel = nom_hotel;
+		this.nbEtoiles = nbEtoiles;
+		this.adresse_hotel = adresse_hotel;
+		this.piscine = piscine;
+		this.restaurant = restaurant;
+		this.parking = parking;
+		this.wifi = wifi;
+		this.description = description;
+		this.image = image;
+		this.numCarteBancaire = numCarteBancaire;
+		this.paiement = paiement;
+		this.annulation = annulation;
+	}
 
     public Long getIdHotel() {
         return idHotel;
     }
 
-    public void setIdHotel(Long idHotel) {
+	public void setIdHotel(Long idHotel) {
         this.idHotel = idHotel;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNom_hotel() {
+        return nom_hotel;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom_hotel(String nom_hotel) {
+        this.nom_hotel = nom_hotel;
     }
 
     public Integer getNbEtoiles() {
@@ -78,12 +88,12 @@ public class Hotel{
         this.nbEtoiles = nbEtoiles;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAdresse_hotel() {
+        return adresse_hotel;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAdresse_hotel(String adresse) {
+        this.adresse_hotel = adresse;
     }
 
     public Integer getPiscine() {
@@ -118,22 +128,22 @@ public class Hotel{
         this.wifi = wifi;
     }
 
-    public String getDescribtion() {
-        return describtion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion;
-    }
-/*
-    public ArrayList<Blob> getImages() {
-        return images;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setImages(ArrayList<Blob> images) {
-        this.images = images;
+    public String getImage() {
+        return image;
     }
-*/
+
+    public void setImages(String image) {
+        this.image = image;
+    }
+
     public String getNumCarteBancaire() {
         return numCarteBancaire;
     }
@@ -173,6 +183,22 @@ public class Hotel{
     public void setChambres(Collection<Chambre> chambres) {
         this.chambres = chambres;
     }
+
+	public boolean isPaiement() {
+		return paiement;
+	}
+
+	public void setPaiement(boolean paiement) {
+		this.paiement = paiement;
+	}
+
+	public int getAnnulation() {
+		return annulation;
+	}
+
+	public void setAnnulation(int annulation) {
+		this.annulation = annulation;
+	}
     
     
 }

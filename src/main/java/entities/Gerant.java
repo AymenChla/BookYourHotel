@@ -1,10 +1,13 @@
 package entities;
 
 import java.util.Date;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @DiscriminatorValue("ROLE_GERANT")
@@ -19,6 +22,7 @@ public class Gerant extends User{
 	private String nom;
     private String prenom;
     private String cin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     private String sexe;
     private String tel;
