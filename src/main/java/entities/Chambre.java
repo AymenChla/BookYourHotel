@@ -50,8 +50,16 @@ public class Chambre{
     public Integer getNumero() {
         return numero;
     }
+    
+    public Long getIdChambre() {
+		return idChambre;
+	}
 
-    public void setNumero(Integer numero) {
+	public void setIdChambre(Long idChambre) {
+		this.idChambre = idChambre;
+	}
+
+	public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

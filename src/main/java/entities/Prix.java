@@ -113,16 +113,19 @@ public class Prix {
   //supprime doublons des chambres (simple,double...)
     static public List<Prix> supprimerDoublonsChambreCategorie(List<Prix> offres)
     {
-    	List<String> instances = new ArrayList<String>();
     	
-    	for(int i=0 ; i < offres.size() ; i++)
+    	List<String> instances = new ArrayList<String>();
+    	Iterator<Prix> i = offres.iterator();
+    	Prix offre;
+    	while(i.hasNext())
     	{
-    		if(instances.contains(offres.get(i).getChambre().getDescription()))
+    		offre = i.next();
+    		if(instances.contains(offre.getChambre().getDescription()))
 			{
-				offres.remove(i);
+				i.remove();
 			}
     		else{
-    			instances.add(offres.get(i).getChambre().getDescription());
+    			instances.add(offre.getChambre().getDescription());
     		}
     	   
     	}

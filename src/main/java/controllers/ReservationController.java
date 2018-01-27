@@ -3,6 +3,7 @@ package controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -79,7 +80,7 @@ public class ReservationController {
 		Date date_fin_sejour = formatter.parse(date_f);
 		
 	
-		//client temporelle
+		//client authentified
 		String username = request.getRemoteUser();
 		//String username = "aymen";
 		Client client = (Client) userRepository.findByUserName(username);
@@ -106,6 +107,8 @@ public class ReservationController {
 		reservation.setChambre(chambre);
 		reservation.setResident(resident);
 		reservation.setClient(client);
+		Double prix = prixRepository.getPrixByIdChambre(chambre.getIdChambre(),date_d);
+		reservation.setPrix_reservation(prix);
 		reservationRepository.save(reservation);
 		
 		//nouveau nbCHambre
@@ -120,5 +123,18 @@ public class ReservationController {
 	}
 	
 	
+	
+	@RequestMapping(value="/mesreservations")
+	public String viewMesReservations(HttpServletRequest request,ModelMap model)
+	{
+		//client authentified
+		String username = request.getRemoteUser();
+		//String username = "aymen";
+		Client client = (Client) userRepository.findByUserName(username);
+		
+		List<Reservation> reservations = reservationRepository.getReservationsByIdCLient(client.getUserid());
+		model.put("reservations", reservations);
+		return "mesreservations";
+	}
 	
 }

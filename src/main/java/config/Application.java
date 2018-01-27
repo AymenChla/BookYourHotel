@@ -1,8 +1,6 @@
 package config;
 
 
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

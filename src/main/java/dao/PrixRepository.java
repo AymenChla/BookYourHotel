@@ -46,4 +46,7 @@ public interface PrixRepository extends JpaRepository<Prix, Long>{
 			+ "and :date_d BETWEEN p.date_debut and p.date_fin",nativeQuery=true)
 	public List<Prix> getAllAvailableOffersByIdHotel(@Param("id_hotel") Long id_hotel,@Param("date_d") String date_d,@Param("date_f") String date_f);
 	
+	@Query(value="select prix from prix  p where id_chambre = ?1 "
+				+ "and ?2 BETWEEN p.date_debut and p.date_fin",nativeQuery=true)
+	public Double getPrixByIdChambre(Long id_chambre,String date_d);
 }

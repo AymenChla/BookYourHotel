@@ -28,6 +28,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
         
         //hotel
         registry.addViewController("/").setViewName("search");
+        
+        
     }    
     
     @Bean

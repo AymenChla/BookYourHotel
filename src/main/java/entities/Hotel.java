@@ -38,6 +38,10 @@ public class Hotel{
     @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
     private Collection<Chambre> chambres;
 
+    
+    private boolean paiement;
+    private int annulation;
+    
     public Hotel() {
     }
 
@@ -176,6 +180,22 @@ public class Hotel{
 
 	public void setDescription_hotel(String description_hotel) {
 		this.description_hotel = description_hotel;
+	}
+
+	public boolean isPaiement() {
+		return paiement;
+	}
+
+	public void setPaiement(boolean paiement) {
+		this.paiement = paiement;
+	}
+
+	public int getAnnulation() {
+		return annulation;
+	}
+
+	public void setAnnulation(int annulation) {
+		this.annulation = annulation;
 	}
     
     

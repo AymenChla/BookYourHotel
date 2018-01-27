@@ -15,7 +15,7 @@
 		<c:out value="${ offre.prix}"></c:out> : 
 		<c:out value="${ offre.chambre.description}"></c:out>
 		<c:out value="${ offre.chambre.hotel.nom_hotel }"></c:out>
-		<form action="/reservation" method="git">
+		<form action="/reservation" method="get">
 			<select name="nbChambres">
 				<c:forEach begin="1" end="${ nbChambres.get(offre.chambre.description) }" var="i">
 					<option><c:out value="${i}"></c:out></option>
