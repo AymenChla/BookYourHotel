@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class GerantController {
 	public String showUpdateHotelPage(ModelMap model)
 	{
 		//Get User
-		Gerant gerant = gerantRepository.findOne((long) 4);
+		Gerant gerant = gerantRepository.findOne((long) 1);
 		Hotel hotel = hotelRepository.findOne(gerant.getHotel().getIdHotel());
 		model.put("hotel", hotel);
 		return "gerant/updatehotel";
@@ -40,7 +41,8 @@ public class GerantController {
 	@RequestMapping(value="/updateHotel", method = RequestMethod.POST)
 	public String showCreateAdminPage(@RequestParam("photo") MultipartFile multipartFile, ModelMap model, Hotel hotel, HttpServletRequest request) throws IllegalStateException, IOException
 	{
-		String filePath = request.getServletContext().getRealPath("/"); 
+		String extension = multipartFile.getOriginalFilename().split("\\.")[1];
+		String filePath = request.getServletContext().getRealPath("/uploads/i"+extension); 
 		multipartFile.transferTo(new File(filePath));
 		
 		hotelRepository.save(hotel);
