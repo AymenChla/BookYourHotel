@@ -37,6 +37,7 @@ public class AdminController {
 	@RequestMapping(value="/createadmin",method = RequestMethod.POST)
 	public String showCreateAdminPage(ModelMap model,Admin admin)
 	{
+		admin.setRole("ROLE_ADMIN");
 		adminRepository.save(admin);
 		model.put("status", "ok");
 		return "createadmin";

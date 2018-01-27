@@ -18,6 +18,7 @@ public class Reservation{
     private Date dateDebutSejour;
     private Date dateFinSejour;
     private Boolean payer;
+    private Double prix_reservation;
     @ManyToOne
     @JoinColumn(name="ID_CLIENT")
     private Client client;
@@ -29,6 +30,8 @@ public class Reservation{
     @ManyToOne
     @JoinColumn(name="ID_CHAMBRE")
     private Chambre chambre;
+    
+  
 
     public Reservation() {
     }
@@ -94,6 +97,14 @@ public class Reservation{
     public void setChambre(Chambre chambre) {
         this.chambre = chambre;
     }
+
+	public Double getPrix_reservation() {
+		return prix_reservation;
+	}
+
+	public void setPrix_reservation(Double prix_reservation) {
+		this.prix_reservation = prix_reservation;
+	}
     
     
     

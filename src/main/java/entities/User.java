@@ -19,7 +19,7 @@ public class User implements Serializable {
     @Column(name="userid")
     private Long userId;
 
-	@Column(name = "username")
+	@Column(name = "username",unique=true)
     private String userName;   
 
 	@Column(name = "password")
@@ -38,7 +38,16 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private Collection<Commentaire> commentaires;
 
+    private String role;
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public User(){
 		
 	}
@@ -113,7 +122,15 @@ public class User implements Serializable {
         this.commentaires = commentaires;
     }
 
-	
+	public Long getUserId() {
+		return userId;
+	}
 
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	
+    
   
 }

@@ -2,6 +2,8 @@
 package entities;
 
 import java.util.Collection;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,14 +23,14 @@ public class Resident {
     private String prenom;
     private String cin;
     private String tel;
-    private String dateNaissance;
+    private Date dateNaissance;
     @OneToMany(mappedBy="resident",fetch=FetchType.LAZY)
     private Collection<Reservation> reservations;
 
     public Resident() {
     }
 
-    public Resident(String nom, String prenom, String cin, String tel, String dateNaissance) {
+    public Resident(String nom, String prenom, String cin, String tel, Date dateNaissance) {
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
@@ -76,11 +78,11 @@ public class Resident {
         this.tel = tel;
     }
 
-    public String getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(String dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 

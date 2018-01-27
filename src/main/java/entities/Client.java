@@ -32,6 +32,7 @@ public class Client extends User {
     private Collection<Rating> ratings;
 
     public Client() {
+    	this.setRole("ROLE_CLIENT");
     }
 
     public Client(String nom, String prenom, String cin, Date dateNaissance, String sexe, String tel, String adresse, String numCarteBancaire, String email, String mdp) {
@@ -44,6 +45,7 @@ public class Client extends User {
         this.tel = tel;
         this.adresse = adresse;
         this.numCarteBancaire = numCarteBancaire;
+        this.setRole("ROLE_CLIENT");
     }
 
     public String getNom() {
@@ -126,6 +128,19 @@ public class Client extends User {
         this.ratings = ratings;
     }
     
+    public Client update(Client client)
+    {
+    	this.setUserName(client.getUserName());
+    	this.setEmail(client.getEmail());
+    	this.tel = client.tel;
+    	this.nom = client.nom;
+    	this.prenom = client.prenom;
+    	this.cin = client.cin;
+    	this.sexe = client.sexe;
+    	this.dateNaissance = client.dateNaissance;
+    	
+    	return this;
+    }
     
     
 }

@@ -25,6 +25,7 @@ public class Hotel{
     private boolean restaurant;
     private boolean parking;
     private boolean wifi;
+
     private String description;
     private String image;
     private String numCarteBancaire;
@@ -41,8 +42,11 @@ public class Hotel{
     @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
     private Collection<Chambre> chambres;
 
+    
+    
     public Hotel() {
     }
+
 
     public Hotel(Long idHotel, String nom_hotel, Integer nbEtoiles,
 			String adresse_hotel, Integer piscine, boolean restaurant,
@@ -72,6 +76,7 @@ public class Hotel{
         this.idHotel = idHotel;
     }
 
+
     public String getNom_hotel() {
         return nom_hotel;
     }
@@ -88,6 +93,7 @@ public class Hotel{
         this.nbEtoiles = nbEtoiles;
     }
 
+
     public String getAdresse_hotel() {
         return adresse_hotel;
     }
@@ -95,6 +101,7 @@ public class Hotel{
     public void setAdresse_hotel(String adresse) {
         this.adresse_hotel = adresse;
     }
+
 
     public Integer getPiscine() {
         return piscine;
@@ -128,6 +135,7 @@ public class Hotel{
         this.wifi = wifi;
     }
 
+
     public String getDescription() {
         return description;
     }
@@ -140,7 +148,7 @@ public class Hotel{
         return image;
     }
 
-    public void setImages(String image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -183,6 +191,7 @@ public class Hotel{
     public void setChambres(Collection<Chambre> chambres) {
         this.chambres = chambres;
     }
+
 
 	public boolean isPaiement() {
 		return paiement;
