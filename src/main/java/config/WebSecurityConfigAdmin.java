@@ -48,7 +48,7 @@ public class WebSecurityConfigAdmin extends WebSecurityConfigurerAdapter {
 	     .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 	     .and()
 	     .authorizeRequests()
-	     .antMatchers("/client/**","/compte**","/reservation","/mesreservations").access("hasRole('ROLE_CLIENT')")
+	     .antMatchers("/compte**","/reservation","/mesreservations").access("hasRole('ROLE_CLIENT')")
 	     .and()
 	     .formLogin().loginPage("/login").permitAll()
 	     .usernameParameter("username").passwordParameter("password")

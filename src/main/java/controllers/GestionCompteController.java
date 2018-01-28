@@ -31,7 +31,7 @@ public class GestionCompteController {
 		String username = request.getRemoteUser();
 		//String username = "aymen";
 		Client client = (Client) userRepository.findByUserName(username);
-
+		
 
 		
 		model.put("client", client);

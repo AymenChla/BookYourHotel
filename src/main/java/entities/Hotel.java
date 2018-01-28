@@ -26,7 +26,7 @@ public class Hotel{
     private boolean parking;
     private boolean wifi;
 
-    private String description;
+    private String description_hotel;
     private String image;
     private String numCarteBancaire;
     
@@ -61,7 +61,7 @@ public class Hotel{
 		this.restaurant = restaurant;
 		this.parking = parking;
 		this.wifi = wifi;
-		this.description = description;
+		this.setDescription_hotel(description);
 		this.image = image;
 		this.numCarteBancaire = numCarteBancaire;
 		this.paiement = paiement;
@@ -136,14 +136,6 @@ public class Hotel{
     }
 
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImage() {
         return image;
     }
@@ -207,6 +199,16 @@ public class Hotel{
 
 	public void setAnnulation(int annulation) {
 		this.annulation = annulation;
+	}
+
+
+	public String getDescription_hotel() {
+		return description_hotel;
+	}
+
+
+	public void setDescription_hotel(String description_hotel) {
+		this.description_hotel = description_hotel;
 	}
     
     

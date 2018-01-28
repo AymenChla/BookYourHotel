@@ -57,11 +57,14 @@ public class ReservationController {
 		HttpSession session = request.getSession();
 		session.setAttribute("categorie", categorie);
 		session.setAttribute("nbChambre", nbChambre);
+		session.setAttribute("nb", nbChambre);
 		session.setAttribute("id_offre",id_offre);
 		
 		
 		Prix offre = prixRepository.getOne(id_offre);
+		session.setAttribute("total", offre.getPrix()*nbChambre);
 		model.put("offre", offre);
+		
 		return "reservation";
 	}
 	
@@ -119,7 +122,15 @@ public class ReservationController {
 		Long id_offre = (Long) session.getAttribute("id_offre");
 		Prix offre = prixRepository.getOne(id_offre);
 		model.put("offre", offre);
-		return "reservation";
+		
+		if(nbChambre!=0)
+			return "reservation";
+		else {
+			System.out.println("ddd: "+offre.getChambre().getHotel().isPaiement());
+			model.put("paiement", offre.getChambre().getHotel().isPaiement());
+			return "reglerpaiement";
+		}
+			
 	}
 	
 	
@@ -137,4 +148,52 @@ public class ReservationController {
 		return "mesreservations";
 	}
 	
+	@RequestMapping(value="/annulation",method= RequestMethod.GET)
+	public String annulerReservation(ModelMap model, Long id_reservation)
+	{
+		reservationRepository.delete(id_reservation);
+		return "redirect:mesreservations";
+	}
+	
+	@RequestMapping(value="/reglerpaiement",method= RequestMethod.GET)
+	public String viewReglerPaiement()
+	{
+		return "reglerpaiement";
+	}
+	
+	@RequestMapping(value="/reglerpaiement",method= RequestMethod.POST)
+	public String reglerPaiement(ModelMap model, HttpServletRequest request )
+	{
+		HttpSession session = request.getSession();
+		Integer nb = (Integer) session.getAttribute("nb");
+		List<Reservation> reservations = reservationRepository.getLastReservations(nb);
+		
+		for (Reservation reservation : reservations) {
+			reservation.setPayer(true);
+		}
+		reservationRepository.save(reservations);
+		
+		return "redirect:/mesreservations";
+	}
+	
+	@RequestMapping(value="/paiement",method= RequestMethod.GET)
+	public String viewReglerPaiement(ModelMap model,Long id)
+	{
+		
+		Reservation reservation = reservationRepository.getOne(id);
+		model.put("montant",reservation.getPrix_reservation());
+		model.put("id_reservation", id);
+		
+		return "paiement";
+	}
+	
+	@RequestMapping(value="/paiement",method= RequestMethod.POST)
+	public String reglerPaiement(ModelMap model,Long id_reservation)
+	{
+		
+		Reservation reservation = reservationRepository.getOne(id_reservation);
+		reservation.setPayer(true);
+		
+		return "redirect:/mesreservations";
+	}
 }

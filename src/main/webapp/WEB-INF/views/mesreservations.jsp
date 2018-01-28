@@ -18,10 +18,10 @@
 		<c:out value="${ reservation.chambre.hotel.nom_hotel }"></c:out><br>
 		<c:choose>
 			<c:when test="${reservation.payer eq false}">
-				<a href="/reglerpaiement">regler paiement</a><br>
+				<a href="/paiement?id=${reservation.idReservation }">regler paiement</a><br>
 			</c:when>
 		</c:choose>
-		<a href="/annulerreservation">Annuler reservation</a><br>
+		<a href="/annulation?id_reservation=${ reservation.idReservation}">Annuler reservation</a><br>
 		<br>
 		<hr>
 	</c:forEach>
