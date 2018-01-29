@@ -52,10 +52,10 @@ public class ReservationController {
 	private UserRepository userRepository;
 	
 	@RequestMapping(value="/reservation")
-	public String BeforeReservation(HttpServletRequest request,ModelMap model, String categorie ,Integer nbChambre,Long id_offre)
+	public String BeforeReservation(HttpServletRequest request,ModelMap model, Integer type ,Integer nbChambre,Long id_offre)
 	{
 		HttpSession session = request.getSession();
-		session.setAttribute("categorie", categorie);
+		session.setAttribute("type", type);
 		session.setAttribute("nbChambre", nbChambre);
 		session.setAttribute("nb", nbChambre);
 		session.setAttribute("id_offre",id_offre);
@@ -74,7 +74,7 @@ public class ReservationController {
 		HttpSession session = request.getSession();
 		Integer nbChambre = (Integer) session.getAttribute("nbChambre");
 		Long id_hotel = (Long) session.getAttribute("id_hotel");
-		String categorie = (String) session.getAttribute("categorie");
+		Integer type= (Integer) session.getAttribute("type");
 		String date_d = (String) session.getAttribute("date_d");
 		String date_f = (String) session.getAttribute("date_f");
 		
@@ -103,7 +103,7 @@ public class ReservationController {
 		}
 		
 		//get une chambre
-		Chambre chambre = chambreRepository.getOneChambreDispoByType(categorie, id_hotel, date_d, date_f);
+		Chambre chambre = chambreRepository.getOneChambreDispoByType(type, id_hotel, date_d, date_f);
 		
 		//save reservation
 		Reservation reservation = new Reservation(date_debut_sejour, date_fin_sejour, false);
@@ -128,6 +128,7 @@ public class ReservationController {
 		else {
 			System.out.println("ddd: "+offre.getChambre().getHotel().isPaiement());
 			model.put("paiement", offre.getChambre().getHotel().isPaiement());
+			model.put("client",client);
 			return "reglerpaiement";
 		}
 			
@@ -173,7 +174,7 @@ public class ReservationController {
 		}
 		reservationRepository.save(reservations);
 		
-		return "redirect:/mesreservations";
+		return "complete";
 	}
 	
 	@RequestMapping(value="/paiement",method= RequestMethod.GET)

@@ -27,7 +27,7 @@ public interface ChambreRepository extends JpaRepository<Chambre, Long>{
 	//on utilise le prix pour ne pas compter les chambres qui non pas de prix
 	@Query(value="select count(id_hotel) from chambres NATURAL JOIN prix p "
 				+ "where id_hotel=?2 "
-				+ "and description=?1 "
+				+ "and type=?1 "
 				+ "and id_chambre not in( "
 					+ "select r.id_chambre from reservations r "
 					+ "where ?3 BETWEEN r.date_debut_sejour and r.date_fin_sejour "
@@ -35,12 +35,12 @@ public interface ChambreRepository extends JpaRepository<Chambre, Long>{
 					+ "or ( ?3 < r.date_debut_sejour and ?4 > r.date_fin_sejour) "
 				+ ") "
 				+ "and ?3 between p.date_debut and p.date_fin" ,nativeQuery=true)
-	public int getNbChambreDispoByType(String description, Long id_hotel,String date_d, String date_f);
+	public int getNbChambreDispoByType(Integer type, Long id_hotel,String date_d, String date_f);
 	
 	
 	@Query(value="select * from chambres NATURAL JOIN prix p "
 			+ "where id_hotel=:id_hotel "
-			+ "and description=:categ "
+			+ "and type=:type "
 			+ "and id_chambre not in( "
 				+ "select r.id_chambre from reservations r "
 				+ "where :date_d BETWEEN r.date_debut_sejour and r.date_fin_sejour "
@@ -49,5 +49,5 @@ public interface ChambreRepository extends JpaRepository<Chambre, Long>{
 			+ ") "
 			+ "and :date_d between p.date_debut and p.date_fin "
 			+ "limit 1" ,nativeQuery=true)
-	public Chambre getOneChambreDispoByType(@Param("categ") String categorie,@Param("id_hotel") Long id_hotel,@Param("date_d") String date_d, @Param("date_f") String date_f);
+	public Chambre getOneChambreDispoByType(@Param("type") Integer type,@Param("id_hotel") Long id_hotel,@Param("date_d") String date_d, @Param("date_f") String date_f);
 }

@@ -56,7 +56,7 @@ public class RechercheController {
 		session.setAttribute("date_d", date_debut);
 		session.setAttribute("date_f", date_fin);
 		
-		return "offers";
+		return "home";
 	}
 	
 	@RequestMapping(value="/hebergements",method=RequestMethod.POST)
@@ -75,9 +75,9 @@ public class RechercheController {
 		offres = Prix.supprimerDoublonsChambreCategorie(offres);
 	
 		//map pour compter nombre chambre dispo par categorie(simple,double...) chambre
-		Map<String,Integer> nbChambresDispo = new HashMap<String,Integer>();
+		Map<Integer,Integer> nbChambresDispo = new HashMap<Integer,Integer>();
 		for (Prix o : offres) {
-			nbChambresDispo.put(o.getChambre().getDescription(), chambreRepository.getNbChambreDispoByType(o.getChambre().getDescription(), id_hotel, date_d, date_f));
+			nbChambresDispo.put(o.getChambre().getType(), chambreRepository.getNbChambreDispoByType(o.getChambre().getType(), id_hotel, date_d, date_f));
 		}
 		model.put("offres",offres);
 		model.put("nbChambres", nbChambresDispo);

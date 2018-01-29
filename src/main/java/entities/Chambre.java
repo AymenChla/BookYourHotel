@@ -127,5 +127,31 @@ public class Chambre{
 		this.hotel = hotel;
 	}
     
+	
+	public String getCategorie()
+	{
+		String categorie="";
+		switch (this.type) {
+		case 1:
+			categorie =  "Simple";
+			break;
+		
+		case 2:
+			categorie =   "Double";
+			break;
+		
+		case 3:
+			categorie =   "Triple";
+			break;
+					
+		case 4:
+			categorie =   "Familiale";
+			break;
+		default:
+			break;
+		}
+		
+		return categorie;
+	}
     
 }

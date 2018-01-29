@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="RESIDENTS")
 public class Resident {
@@ -23,7 +25,10 @@ public class Resident {
     private String prenom;
     private String cin;
     private String tel;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
+    private String adresse;
+    
     @OneToMany(mappedBy="resident",fetch=FetchType.LAZY)
     private Collection<Reservation> reservations;
 
@@ -93,5 +98,13 @@ public class Resident {
     public void setReservations(Collection<Reservation> reservations) {
         this.reservations = reservations;
     }
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
     
 }
