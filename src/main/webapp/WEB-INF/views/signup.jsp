@@ -20,29 +20,41 @@
 <body class="internal-pages coming-soon">
 	<div class="coming-soon-inner-box ">
 		<h1>Book Hotel</h1>
+			<h1 class="desc">Créez votre compte</h1>
 			<div class="col-md-2"></div>
 
 			<div class="search-box ">
-				<form class="col-md-8 search-form" role="form" action="/comptepass" method="POST">
-					
-						<div class="text-danger">${msg}</div>
+				<form class="col-md-8 search-form" role="form" action="/signup" method="POST">
+					<c:if test="${param.error ne null}">
+							<div class="text-danger">Login ou mots de passe incorrect.</div>
+						</c:if>
+						<c:if test="${param.logout ne null}">
+							<div class="text-info">Vous vous êtes déconnectez.</div>
+						</c:if>
 					<fieldset>
-						
-						
 						<div class="form-group">
-							<input class="form-control"  type="password" name="password"  placeholder="Password *" required>
+							<input class="form-control" placeholder="Nom *" name="nom" type="text" autofocus="" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control"  type="password" name="newPassword"  placeholder="New Password *" required>
+							<input class="form-control" placeholder="Prenom *" name="prenom" type="text" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control"  type="password" name="confirmation"  placeholder="Confirmation *" required>
+							<input class="form-control"  name="dateNaissance" type="date" required>
 						</div>
-						<input type="submit" class="btn btn-primary col-md-12" value="Modifier">
+						<div class="form-group">
+							<input class="form-control"  placeholder="Email *" name="email" type="text" required>
+						</div>
+						<div class="form-group">
+							<input class="form-control"  placeholder="Username *" name="userName" type="text" required>
+						</div>
+						<div class="form-group">
+							<input class="form-control"  placeholder="Password *" name="password" type="Password" required>
+						</div>
+						<input type="submit" class="btn btn-primary col-md-12" value="Créez votre compte">
 						
 					</fieldset>
 					
-					<a class="text-warning" href="/compteinfos"><h3>Modifiez les informations du compte</h3></a>
+					<a class="text-warning" href="/login"><h3>Vous avez déjà un compte ?</h3></a>
 				</form>
 
 

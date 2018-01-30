@@ -3,6 +3,7 @@ package entities;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -29,14 +30,14 @@ public class Client extends User {
     @OneToMany(mappedBy="client",fetch=FetchType.LAZY)
     private Collection<Reservation> reservations;
     @OneToMany(mappedBy="client",fetch=FetchType.LAZY)
-    private Collection<Rating> ratings;
+    private List<Rating> ratings;
 
     public Client() {
     	this.setRole("ROLE_CLIENT");
     }
 
-    public Client(String nom, String prenom, String cin, Date dateNaissance, String sexe, String tel, String adresse, String numCarteBancaire, String email, String mdp) {
-        super(email, mdp);
+    public Client(String nom, String prenom, String cin, Date dateNaissance, String sexe, String tel, String adresse, String numCarteBancaire, String email, String userName,String password) {
+        super(email, userName,password);
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
@@ -120,11 +121,11 @@ public class Client extends User {
         this.reservations = reservations;
     }
 
-    public Collection<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Collection<Rating> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
     

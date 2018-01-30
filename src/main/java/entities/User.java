@@ -60,10 +60,11 @@ public class User implements Serializable {
 	        this.enabled=user.enabled;        
 	}
 	
-	public User(String email, String password)
+	public User(String email,String username,String password)
 	{
 		this.email = email;
 		this.password = password;
+		this.userName = username;
 	}
 	
 	public int getEnabled() {

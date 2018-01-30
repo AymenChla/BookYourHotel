@@ -24,13 +24,13 @@
 				<!-- Main Menu -->
 				<nav id="main-menu">
 					<ul class="list-inline">
-						<li class="active"><a href="#">Accueil</a> 
+						<li class="active"><a href="/">Accueil</a> 
 						</li>
 						<sec:authorize ifAnyGranted="ROLE_CLIENT">
 					       	 <li>
 					        	<a href="#"><c:out value="${pageContext.request.remoteUser}"></c:out></a>
 									<ul>
-										<li><a href="/compteinfos">Paramètres</a></li>
+										<li><a href="/compteinfos">Mon compte</a></li>
 										<li><a href="/mesreservations">Mes réservations</a></li>
 										<li><a href="logout">Se déconnectez</a></li>
 									</ul>
@@ -40,7 +40,12 @@
 					       		<li><a href="/login">Connectez-vous</a></li>
 					    </sec:authorize>
 						
-						
+						<sec:authorize ifNotGranted="ROLE_CLIENT">
+					       	 
+								<li><a href="/signup">Créez compte</a></li>
+									
+					    </sec:authorize>
+
 						<li><a href="#">Contact</a>
 						</li>
 					</ul>

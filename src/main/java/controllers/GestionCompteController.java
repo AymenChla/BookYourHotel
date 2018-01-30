@@ -86,7 +86,7 @@ public class GestionCompteController {
 		else{
 			client.setPassword(newPassword);
 			clientRepository.save(client);
-			msg = "password is modified";
+			msg = "votre mot de passe est modifié";
 		}
 				
 		model.put("msg",msg);

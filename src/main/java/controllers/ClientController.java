@@ -15,13 +15,19 @@ public class ClientController {
 	@Autowired
 	ClientRepository clientRepository;
 	
-	@RequestMapping(value="/createClient" , method = RequestMethod.POST)
+	@RequestMapping(value="/signup" , method = RequestMethod.GET)
+	public String viewSignup()
+	{
+		return "signup";
+	}
+
+	@RequestMapping(value="/signup" , method = RequestMethod.POST)
 	public String createClient(ModelMap model,Client client)
 	{
 		client.setRole("ROLE_CLIENT");
 		clientRepository.save(client);
-		model.put("status", "ok");
-		return "client/signup";
+		
+		return "redirect:/login";
 	}
 	
 	

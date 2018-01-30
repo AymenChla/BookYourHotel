@@ -14,30 +14,90 @@
 	<meta name="author" content="Joseph a, ravistheme@gmail.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no">
 	<link href='https://fonts.googleapis.com/css?family=Lobster%7cRaleway:400,300,100,600,700,800' rel='stylesheet' type='text/css'><!-- Attach Google fonts -->
-	<link rel="stylesheet" type="text/css" href="../assets/css/styles.css"><!-- Attach the main stylesheet file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css"><!-- Attach the main stylesheet file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/rating.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body class="internal-pages trans-header sticky">
+<body class="internal-pages sticky room-details trans-header">
+	
 	
 
 	<!-- Main Header -->
 	<c:import url="header.jsp"></c:import>
 	<!-- End of Main Header -->
 
-	<!-- Internal Page Header -->
+	<div class="room-detail-page">
+
+		<!-- Internal Page Header -->
 	<div class="internal-page-title about-page" data-parallax="scroll" data-image-src="assets/img/internal-header.jpg">
 		<h1><span>Hôtel ${offres.get(0).chambre.hotel.nom_hotel}</span> - Chambres</h1>
 		<ol class="breadcrumb"><!-- Internal Page Breadcrumb -->
             <li><a href="../index.html">Accueil</a></li>
             <li>Hôtel ${offres.get(0).chambre.hotel.nom_hotel}</li>
-            <li class="active">Liste de chambres</li>
+            <li class="active">
+            	<c:forEach begin='1' end="${offres.get(0).chambre.hotel.nbEtoiles}">
+            		<i class="fa fa-star"></i>
+            	</c:forEach>
+            </li>
         </ol>
 	</div>
 	<!-- End of Internal Page Header -->
+
+	    <div class="room-details container">
+	    	<div class="description">
+	    		${offres.get(0).chambre.hotel.description_hotel}
+			</div>
+			<div class="col-sm-3">
+				<div class="rating-block">
+					<h4>Moyenne rating</h4>
+					<h2 class="bold padding-bottom-7">${avgRating} <small>/ 5</small></h2>
+					
+					<c:forEach begin="1" end="${ avgRating }" var="i">
+								<a  href="/rating?s=${i}" type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</a>
+					</c:forEach>
+					<c:forEach begin="${avgRating+1}" end="${ 5 }" var="i">
+								<a  href="/rating?s=${i}" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</a>
+					</c:forEach>
+					
+			
+					
+				</div>
+
+			</div>
+	    	<ul class="services list-inline">
+	    		<c:if test="${offres.get(0).chambre.hotel.annulation==0}">
+	    			<li><i class="fa fa-check"></i>Annulation gratuite</li>	
+	    		</c:if>
+	    		<c:if test="${offres.get(0).chambre.hotel.paiement eq false}">
+	    			<li><i class="fa fa-check"></i>Paiement non pré-requis</li>	
+	    		</c:if>
+				<c:if test="${offres.get(0).chambre.hotel.parking}">
+	    			<li><i class="fa fa-check"></i>Parking</li>	
+	    		</c:if>
+	    		<c:if test="${offres.get(0).chambre.hotel.piscine!=0}">
+	    			<li><i class="fa fa-check"></i>Piscine ${offres.get(0).chambre.hotel.piscine} m<sup>2</sup></li>	
+	    		</c:if>
+				<c:if test="${offres.get(0).chambre.hotel.wifi eq true}">
+	    			<li><i class="fa fa-check"></i>Free Wifi</li>	
+	    		</c:if>
+				
+			</ul>
+			<ul class="services list-inline">
+				<li><i class="fa fa-lg fa-map-marker"></i>${offres.get(0).chambre.hotel.adresse_hotel}</li>
+			</ul>
+
+	    </div>
+	    
+	</div>	
 	
 	<!-- Rooms Container -->
 	<div class="room-container container room-list">
 		
-		
+		<div style="height: 60px;"></div>
 		<c:forEach items="${ offres}" var="offre">
 		<form action="/reservation" method="get">
 	
@@ -87,6 +147,66 @@
 	</div>
 	<!-- End of Rooms Container -->
 
+
+	<!-- Post Container -->
+				<div class="post-container">
+					<!-- Post boxes -->
+					<div class="post-box">
+						
+						
+						
+						
+						<!-- Comment Box -->
+						<div class="comments-container">
+							<h3>${commentaires.size()} <b>Commentaires</b></h3>
+							
+							<c:forEach items="${commentaires }" var="comment">
+							<!-- Comment Boxes -->
+							<div class="comment-box-container">
+								<div class="comment-box">
+									<div class="user-img">
+										<img src="assets/img/staff/5.jpg" alt="">
+									</div>
+									<div class="comment-info">
+										<div class="user-name">${comment.user.prenom} ${comment.user.nom}</div>
+										<div class="comment-date">${comment.dateCommentaire}</div>
+										<c:if test="${pageContext.request.remoteUser == comment.user.userName}">
+											<a href="/removecomment?id=${comment.idCommentaire}" class="reply fa fa-remove"></a>
+										</c:if>
+									</div>
+									<div class="comment-text">
+										${ comment.commentaire }
+									</div>
+								</div>
+							
+
+							</div>
+						</c:forEach>
+							
+						</div>
+						<!-- End of Comment Box -->
+
+						<!-- Comment Form -->
+						<div class="comment-form-container">
+							<h3>Ecrire un <b>Commentaire</b></h3>
+							<div class="desc">Please fill all the fields of the below form and let us know what you are thinking about this hotel.</div>
+							<form class="comment-form" action="/savecomment" method="post">
+								<div class="field-row">
+									<textarea name="commmentaire" placeholder="Votre commentaire :"></textarea>
+								</div>
+								<div class="field-row">
+									<input type="submit" value="Ajouter" class="btn btn-default">
+								</div>
+							</form>
+
+						</div>
+						<!-- End of Comment Form -->
+
+					</div>
+
+				</div>
+				<!-- End of Post Container -->
+
 	<!-- Pagination -->
 	<div class="pagination-box">
         <ul class="list-inline">
@@ -103,64 +223,8 @@
 	
 
 	<!-- Top Footer -->
-	<div id="top-footer">
-		<div id="go-up-box"><i class="fa fa-chevron-up"></i></div>
-		<div class="inner-container container">
-			<div class="widget col-xs-6 col-md-4">
-				<h4>Text Widget</h4>
-				<div class="widget-content">
-					Text widget can be used for putting text, images and some other elements in the widget areas. As an example you can add your short description about your hotel and add your logo in this area. Also you can add some useful information like notification in this area.
-				</div>
-			</div>
-			<div class="widget col-xs-6 col-md-4">
-				<h4>Newsletter</h4>
-				<div class="widget-content">
-					<div class="desc">
-						Some description of how your newsletter works will be located in this section.
-					</div>
-					<form class="news-letter-form">
-						<input type="text" class="email" placeholder="Email">
-						<input type="submit" class="btn btn-default" value="Sign up Now">
-					</form>
-				</div>
-			</div>
-			<div class="widget col-md-4 get-in-touch">
-				<h4>Get in Touch</h4>
-				<div class="widget-content">
-					<ul>
-						<li><i class="fa fa-map-marker "></i>133 Elizabethstreet, Sydney 4000, Australia</li>
-						<li><i class="fa fa-phone"></i>0185 26 37 48 59</li>
-						<li><i class="fa fa-envelope-o"></i>info@pinar.com</li>
-					</ul>
-					<ul class="list-inline social-icons">
-						<li><a href="#"><i class="fa fa-facebook "></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-skype"></i></a></li>
-						<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	<c:import url="footer.jsp"></c:import>
 	<!-- End of Top Footer -->
-
-	<!-- Footer -->
-	<footer id="footer">
-		<nav>
-			<ul class="list-inline">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Gallery</a></li>
-				<li><a href="#">Events</a></li>
-				<li><a href="#">Rooms</a></li>
-			</ul>
-		</nav>
-		<div class="copy-right">
-			&copy; 2014 Pinar. All Rights Reserved.
-		</div>
-	</footer>
-	<!-- End of Footer -->
 
 	<!-- Include the js files  -->
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>

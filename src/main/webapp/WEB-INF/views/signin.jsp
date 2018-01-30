@@ -20,29 +20,38 @@
 <body class="internal-pages coming-soon">
 	<div class="coming-soon-inner-box ">
 		<h1>Book Hotel</h1>
+			<h1 class="desc">Se connectez</h1>
 			<div class="col-md-2"></div>
 
-			<div class="search-box ">
-				<form class="col-md-8 search-form" role="form" action="/comptepass" method="POST">
-					
-						<div class="text-danger">${msg}</div>
+			<div class="search-box">
+				<form class="col-md-8 search-form" role="form" action="/login" method="POST">
+					<c:if test="${param.error ne null}">
+							<div class="text-danger">Login ou mots de passe incorrect.</div>
+						</c:if>
+						<c:if test="${param.logout ne null}">
+							<div class="text-info">Vous vous êtes déconnectez.</div>
+						</c:if>
 					<fieldset>
-						
-						
 						<div class="form-group">
-							<input class="form-control"  type="password" name="password"  placeholder="Password *" required>
+							<input class="form-control" placeholder="Username *" name="username" type="text" autofocus="" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control"  type="password" name="newPassword"  placeholder="New Password *" required>
+							<input class="form-control" placeholder="Password *" name="password" type="password" required="">
 						</div>
-						<div class="form-group">
-							<input class="form-control"  type="password" name="confirmation"  placeholder="Confirmation *" required>
+						<div class=" pull-left">
+							<table>
+								<tr>
+									<td><input id="check" name="remember" type="checkbox" value="Remember Me"> </td>
+									<td><label for="check"> Se souvenir de moi</label></td>
+								</tr>
+							</table>
 						</div>
-						<input type="submit" class="btn btn-primary col-md-12" value="Modifier">
+						<input type="submit" class="btn btn-primary col-md-12" value="Se connectez">
 						
 					</fieldset>
 					
-					<a class="text-warning" href="/compteinfos"><h3>Modifiez les informations du compte</h3></a>
+					<br><br><br>
+					<a class="text-warning" href="/signup"><h3>Vous n'avez pas un compte ?</h3></a>
 				</form>
 
 

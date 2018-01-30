@@ -35,8 +35,8 @@ public class Gerant extends User{
     public Gerant() {
     }
 
-    public Gerant(String nom, String prenom, String cin, Date date_naissance, String sexe, String tel, String adresse, String email, String mdp) {
-        super(email, mdp);
+    public Gerant(String nom, String prenom, String cin, Date date_naissance, String sexe, String tel, String adresse, String email, String username, String password) {
+        super(email, username, password);
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;

@@ -44,7 +44,7 @@
 	
 	</div>
 	<!-- End of Welcome -->
-	
+
 	<!-- Special Packages -->
 	<div id="special-packages-type-2" class="container">
 
@@ -64,12 +64,14 @@
 							<div class="package-boxes wow fade fadeInUp right">
 						</c:otherwise>
 					</c:choose>
-
-			
+					
 					<img src="../assets/img/packages/1.jpg" alt="King Suit" class="package-img"><!-- package Image -->
 					<div class="package-details col-md-6 col-lg-4">
 						<div class="title">Hôtel ${reservation.chambre.hotel.nom_hotel}</div><!-- package title -->
 						<h4 class="title"><small>Chambre ${reservation.chambre.categorie}</small></h4>
+
+						<!--<div style="color: #c5a46c;"><b><i class="fa fa-map-marker"></i> ${reservation.chambre.hotel.adresse_hotel}</b></div>-->
+						
 						<div class="description"><!-- package Description -->
 
 							<ul class="list-inline">
@@ -104,64 +106,8 @@
 
 
 	<!-- Top Footer -->
-	<div id="top-footer">
-		<div id="go-up-box"><i class="fa fa-chevron-up"></i></div>
-		<div class="inner-container container">
-			<div class="widget col-xs-6 col-md-4">
-				<h4>Text Widget</h4>
-				<div class="widget-content">
-					Text widget can be used for putting text, images and some other elements in the widget areas. As an example you can add your short description about your hotel and add your logo in this area. Also you can add some useful information like notification in this area.
-				</div>
-			</div>
-			<div class="widget col-xs-6 col-md-4">
-				<h4>Newsletter</h4>
-				<div class="widget-content">
-					<div class="desc">
-						Some description of how your newsletter works will be located in this section.
-					</div>
-					<form class="news-letter-form">
-						<input type="text" class="email" placeholder="Email">
-						<input type="submit" class="btn btn-default" value="Sign up Now">
-					</form>
-				</div>
-			</div>
-			<div class="widget col-md-4 get-in-touch">
-				<h4>Get in Touch</h4>
-				<div class="widget-content">
-					<ul>
-						<li><i class="fa fa-map-marker "></i>133 Elizabethstreet, Sydney 4000, Australia</li>
-						<li><i class="fa fa-phone"></i>0185 26 37 48 59</li>
-						<li><i class="fa fa-envelope-o"></i>info@pinar.com</li>
-					</ul>
-					<ul class="list-inline social-icons">
-						<li><a href="#"><i class="fa fa-facebook "></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-skype"></i></a></li>
-						<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	<c:import url="footer.jsp"></c:import>
 	<!-- End of Top Footer -->
-
-	<!-- Footer -->
-	<footer id="footer">
-		<nav>
-			<ul class="list-inline">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Gallery</a></li>
-				<li><a href="#">Events</a></li>
-				<li><a href="#">Rooms</a></li>
-			</ul>
-		</nav>
-		<div class="copy-right">
-			&copy; 2014 Pinar. All Rights Reserved.
-		</div>
-	</footer>
-	<!-- End of Footer -->
 
 	<!-- Include the js files  -->
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>
