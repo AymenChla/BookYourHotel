@@ -32,6 +32,8 @@ public class Hotel{
     
     private boolean paiement;
     private int annulation;
+    
+    private int nbChambres = 0;
    
     @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
     private Collection<Gerant> gerants;
@@ -51,7 +53,7 @@ public class Hotel{
     public Hotel(Long idHotel, String nom_hotel, Integer nbEtoiles,
 			String adresse_hotel, Integer piscine, boolean restaurant,
 			boolean parking, boolean wifi, String description, String image,
-			String numCarteBancaire, boolean paiement, int annulation) {
+			String numCarteBancaire, boolean paiement, int annulation, int nbChambres) {
 		
 		this.idHotel = idHotel;
 		this.nom_hotel = nom_hotel;
@@ -66,7 +68,25 @@ public class Hotel{
 		this.numCarteBancaire = numCarteBancaire;
 		this.paiement = paiement;
 		this.annulation = annulation;
+		this.nbChambres = nbChambres;
 	}
+    
+    public Hotel(Hotel hotel){
+    	this.idHotel = hotel.getIdHotel();
+		this.nom_hotel = hotel.getNom_hotel();
+		this.nbEtoiles = hotel.getNbEtoiles();
+		this.adresse_hotel = hotel.getAdresse_hotel();
+		this.piscine = hotel.getPiscine();
+		this.restaurant = hotel.isRestaurant();
+		this.parking = hotel.isParking();
+		this.wifi = hotel.isWifi();
+		this.description = hotel.getDescription();
+		this.image = hotel.getImage();
+		this.numCarteBancaire = hotel.getNumCarteBancaire();
+		this.paiement = hotel.isPaiement();
+		this.annulation = hotel.getAnnulation();
+		this.nbChambres = hotel.getNbChambres();
+    }
 
     public Long getIdHotel() {
         return idHotel;
@@ -207,6 +227,16 @@ public class Hotel{
 
 	public void setAnnulation(int annulation) {
 		this.annulation = annulation;
+	}
+
+
+	public int getNbChambres() {
+		return nbChambres;
+	}
+
+
+	public void setNbChambres(int nbChambres) {
+		this.nbChambres = nbChambres;
 	}
     
     

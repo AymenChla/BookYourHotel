@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="PRIX")
 public class Prix {
@@ -23,7 +25,9 @@ public class Prix {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idPrix;
     private Double prix;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebut;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFin;
     private Double tauxReduction;
     
@@ -39,6 +43,13 @@ public class Prix {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.tauxReduction = tauxReduction;
+    }
+    
+    public Prix(Prix prix) {
+        this.prix = prix.getPrix();
+        this.dateDebut = prix.getDateDebut();
+        this.dateFin = prix.getDateFin();
+        this.tauxReduction = prix.getTauxReduction();
     }
     
     public Long getIdPrix() {
@@ -110,26 +121,25 @@ public class Prix {
     	return offres;
     }
     
-  //supprime doublons des chambres (simple,double...)
-    static public List<Prix> supprimerDoublonsChambreCategorie(List<Prix> offres)
+  //supprime doublons des types chambres
+    static public List<Prix> supprimerDoublonsChambreCategorie(List<Prix> prix)
     {
-    	
-    	List<String> instances = new ArrayList<String>();
-    	Iterator<Prix> i = offres.iterator();
-    	Prix offre;
+    	List<Integer> instances = new ArrayList<Integer>();
+    	Iterator<Prix> i = prix.iterator();
+    	Prix iprix;
     	while(i.hasNext())
     	{
-    		offre = i.next();
-    		if(instances.contains(offre.getChambre().getDescription()))
+    		iprix = i.next();
+    		if(instances.contains(iprix.getChambre().getType()))
 			{
 				i.remove();
 			}
     		else{
-    			instances.add(offre.getChambre().getDescription());
+    			instances.add(iprix.getChambre().getType());
     		}
     	   
     	}
-    	return offres;
+    	return prix;
     }
 
 }

@@ -49,4 +49,7 @@ public interface PrixRepository extends JpaRepository<Prix, Long>{
 	@Query(value="select prix from prix  p where id_chambre = ?1 "
 				+ "and ?2 BETWEEN p.date_debut and p.date_fin",nativeQuery=true)
 	public Double getPrixByIdChambre(Long id_chambre,String date_d);
+	
+	@Query(value="SELECT * FROM prix p NATURAL JOIN chambres c where c.id_hotel = :hotel", nativeQuery=true)
+	public List<Prix> getAllPrix(@Param("hotel") Long hotel);
 }

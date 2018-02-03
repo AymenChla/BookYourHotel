@@ -11,6 +11,12 @@ import entities.Chambre;;
 
 public interface ChambreRepository extends JpaRepository<Chambre, Long>{
 	
+	@Query(value="select * from chambres where id_hotel=?1 ", nativeQuery=true)
+	public List<Chambre> findByIdHotel(Long idHotel);
+	
+	@Query(value="select * from chambres where id_hotel=?1 AND type=?2 ", nativeQuery=true)
+	public List<Chambre> findByType(Long idHotel, Integer type);
+	
 	//@Query("from Hotel where adresse like '%?%' and idHotel in(Select idHotel from Chambre where )")
 	@Query("from Chambre where hotel.idHotel=1 ")
 	public List<Chambre> rechercherCHambre();

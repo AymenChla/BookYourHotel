@@ -10,15 +10,20 @@
 	${status }
 	<form action="/updateHotel" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="idHotel" value="${ hotel.idHotel }" />
-		nom <input type="text" name="nom_hotel" value="${ hotel.nom_hotel }" required/><br/>
-		nb etoiles <input type="text" name="nbEtoiles" value="${ hotel.nbEtoiles }" required/><br/>
-		numCarteBancaire <input type="text" name="numCarteBancaire" value="${ hotel.numCarteBancaire }" required/><br/>
+		<input type="hidden" name="nbChambres" value="${ hotel.nbChambres }" />
+		nom <input type="text" name="nom_hotel" value="${ hotel.nom_hotel }" /><br/>
+		nb etoiles <input type="text" name="nbEtoiles" value="${ hotel.nbEtoiles }" /><br/>
+		numCarteBancaire <input type="text" name="numCarteBancaire" value="${ hotel.numCarteBancaire }" /><br/>
 		adresse <textarea type="text" name="adresse_hotel" required>${ hotel.adresse_hotel }</textarea><br/>
 		Description <textarea type="text" name="description" required>${ hotel.description }</textarea><br/>
-		Taille du picscine <input type="text" name="piscine" value="${ hotel.piscine }" required/><br/>
+		Taille du picscine <input type="text" name="piscine" value="${ hotel.piscine }" /><br/>
 		<input type="checkbox" id="r" name="restaurant" /> Restauration<br/>
 		<input type="checkbox" id="p" name="parking" /> Parking<br/>
 		<input type="checkbox" id="w" name="wifi" /> Wi-fi<br/>
+		<br/>
+		<input type="checkbox" id="pr" name="paiement" /> Paiement requis<br/>
+		Pourcentage d'annulation <input type="text" name="annulation" value="${ hotel.annulation }" /><br/>
+		<br/>
 		<input type="file" name="photo" /><br/>
 		
 		<input type="submit" />
@@ -39,6 +44,11 @@
 		document.getElementById('w').checked = true;
 	} else { 
 		document.getElementById('w').checked = false; 
+	}
+	if (${hotel.paiement} === true){ 
+		document.getElementById('pr').checked = true;
+	} else { 
+		document.getElementById('pr').checked = false; 
 	}
 	</script>
 </body>
