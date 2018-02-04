@@ -3,9 +3,11 @@ package dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import entities.Rating;
 
+@Repository
 public interface RatingRepository extends JpaRepository<Rating, Long>{
 	@Query(value = "select avg(nb_etoiles) from ratings where id_hotel = :id_hotel group by id_hotel",nativeQuery=true)
 	public Float getAvgRatingByHotel(@Param("id_hotel") Long id_hotel);

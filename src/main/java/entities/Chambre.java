@@ -23,7 +23,7 @@ public class Chambre{
     private Integer taille;
     private Integer type;
     private Boolean climatisation;
-    //private Collection<String> photos;
+    private String photo;
     private String description;
     @ManyToOne
     @JoinColumn(name="ID_HOTEL")
@@ -38,16 +38,24 @@ public class Chambre{
     public Chambre() {
     }
 
-    public Chambre(Integer numero, Integer taille, Integer type, Boolean climatisation, String description) {
+    public Chambre(Integer numero, Integer taille, Integer type, Boolean climatisation, String photo, String description) {
         this.numero = numero;
         this.taille = taille;
         this.type = type;
         this.climatisation = climatisation;
-        //this.photos = photos;
+        this.photo = photo;
         this.description = description;
     }
 
-    public Integer getNumero() {
+    public Chambre(Chambre chambre) {
+		this.taille = chambre.getTaille();
+		this.type = chambre.getType();
+		this.climatisation = chambre.getClimatisation();
+		this.description = chambre.getDescription();
+		this.hotel = chambre.getHotel();
+	}
+
+	public Integer getNumero() {
         return numero;
     }
     
@@ -87,13 +95,13 @@ public class Chambre{
         this.climatisation = climatisation;
     }
 
-    /*public Collection<String> getPhotos() {
-        return photos;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotos(Collection<String> photos) {
-        this.photos = photos;
-    }*/
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getDescription() {
         return description;
@@ -126,8 +134,7 @@ public class Chambre{
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
-    
-	
+
 	public String getCategorie()
 	{
 		String categorie="";
@@ -153,5 +160,6 @@ public class Chambre{
 		
 		return categorie;
 	}
+
     
 }

@@ -14,6 +14,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>{
 	public List<Reservation> getReservationsByIdCLient(Long id_client);
 	
 	@Query(value="select * from reservations order by id_reservation desc limit ?1",nativeQuery=true)
-	public List<Reservation> getLastReservations(int nb);
+	public List<Reservation> getLastReservations(Integer nb);
 }
 
