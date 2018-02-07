@@ -2,12 +2,15 @@ package entities;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,14 +27,17 @@ public class Chambre{
     private Integer type;
     private Boolean climatisation;
     private String photo;
+    
+    @Lob
+    @Column(name="description", length=1000)
     private String description;
     @ManyToOne
     @JoinColumn(name="ID_HOTEL")
     private Hotel hotel;
     
-    @OneToMany(mappedBy="chambre",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="chambre",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Reservation> reservations;
-    @OneToMany(mappedBy="chambre",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="chambre",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Prix> prix;
     
 

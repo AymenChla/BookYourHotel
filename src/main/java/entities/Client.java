@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,9 +28,9 @@ public class Client extends User {
     private String tel;
     private String adresse;
     private String numCarteBancaire;
-    @OneToMany(mappedBy="client",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="client",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Reservation> reservations;
-    @OneToMany(mappedBy="client",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="client",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private List<Rating> ratings;
 
     public Client() {

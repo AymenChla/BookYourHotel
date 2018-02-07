@@ -26,7 +26,7 @@
 		<h1>Réservation de <span>Chambre</span></h1>
 		<ol class="breadcrumb"><!-- Internal Page Breadcrumb -->
             <li><a href="/">Accueil</a></li>
-             <li>Hôtel ${offre.chambre.hotel.nom_hotel}</li>
+             <li>${offre.chambre.hotel.nom_hotel}</li>
             <li class="active">Chambre ${offre.chambre.categorie}</li>
         </ol>
 	</div>

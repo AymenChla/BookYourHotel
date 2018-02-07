@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,11 +30,11 @@
 	<div class="room-detail-page">
 
 		<!-- Internal Page Header -->
-	<div class="internal-page-title about-page" data-parallax="scroll" data-image-src="assets/img/internal-header.jpg">
-		<h1><span>Hôtel ${offres.get(0).chambre.hotel.nom_hotel}</span> - Chambres</h1>
+	<div class="internal-page-title about-page" data-parallax="scroll" data-image-src="${ offres.get(0).chambre.hotel.image}">
+		<h1><span>${offres.get(0).chambre.hotel.nom_hotel}</span> - Chambres</h1>
 		<ol class="breadcrumb"><!-- Internal Page Breadcrumb -->
             <li><a href="../index.html">Accueil</a></li>
-            <li>Hôtel ${offres.get(0).chambre.hotel.nom_hotel}</li>
+            <li>${offres.get(0).chambre.hotel.nom_hotel}</li>
             <li class="active">
             	<c:forEach begin='1' end="${offres.get(0).chambre.hotel.nbEtoiles}">
             		<i class="fa fa-star"></i>
@@ -44,52 +45,132 @@
 	<!-- End of Internal Page Header -->
 
 	    <div class="room-details container">
-	    	<div class="description">
-	    		${offres.get(0).chambre.hotel.description_hotel}
-			</div>
-			<div class="col-sm-3">
-				<div class="rating-block">
-					<h4>Moyenne rating</h4>
-					<h2 class="bold padding-bottom-7">${avgRating} <small>/ 5</small></h2>
-					
-					<c:forEach begin="1" end="${ avgRating }" var="i">
-								<a  href="/rating?s=${i}" type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-								</a>
-					</c:forEach>
-					<c:forEach begin="${avgRating+1}" end="${ 5 }" var="i">
-								<a  href="/rating?s=${i}" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-								</a>
-					</c:forEach>
-					
-			
-					
+	    
+	   	
+			<div class="row" style="margin-top:50px">
+				<div class="text-left col-md-6"  >
+			    	${fn:substring(offres.get(0).chambre.hotel.description_hotel,0,1180)}
 				</div>
-
-			</div>
-	    	<ul class="services list-inline">
-	    		<c:if test="${offres.get(0).chambre.hotel.annulation==0}">
-	    			<li><i class="fa fa-check"></i>Annulation gratuite</li>	
-	    		</c:if>
-	    		<c:if test="${offres.get(0).chambre.hotel.paiement eq false}">
-	    			<li><i class="fa fa-check"></i>Paiement non pré-requis</li>	
-	    		</c:if>
-				<c:if test="${offres.get(0).chambre.hotel.parking}">
-	    			<li><i class="fa fa-check"></i>Parking</li>	
-	    		</c:if>
-	    		<c:if test="${offres.get(0).chambre.hotel.piscine!=0}">
-	    			<li><i class="fa fa-check"></i>Piscine ${offres.get(0).chambre.hotel.piscine} m<sup>2</sup></li>	
-	    		</c:if>
-				<c:if test="${offres.get(0).chambre.hotel.wifi eq true}">
-	    			<li><i class="fa fa-check"></i>Free Wifi</li>	
-	    		</c:if>
+				<div class="col-sm-3 col-md-3">
+					<div class="rating-block">
+						<h4>Moyenne rating</h4>
+						<h2 class="bold padding-bottom-7">${offres.get(0).chambre.hotel.avgRating} <small>/ 5</small></h2>
+						
+						<c:forEach begin="1" end="${ offres.get(0).chambre.hotel.avgRating }" var="i">
+									<a  href="/rating?s=${i}" type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+									  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									</a>
+						</c:forEach>
+						<c:forEach begin="${offres.get(0).chambre.hotel.avgRating+1}" end="${ 5 }" var="i">
+									<a  href="/rating?s=${i}" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+									  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									</a>
+						</c:forEach>
+						
 				
-			</ul>
-			<ul class="services list-inline">
-				<li><i class="fa fa-lg fa-map-marker"></i>${offres.get(0).chambre.hotel.adresse_hotel}</li>
-			</ul>
-
+						
+					</div>
+	
+				</div>
+				<div class="col-md-3">
+						<div class="pull-left">
+						<div class="pull-left" style="width:35px; line-height:1;">
+							<div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+						</div>
+						<div class="pull-left" style="width:180px;">
+							<div class="progress" style="height:9px; margin:8px 0;">
+							 <c:if test="${ offres.get(0).chambre.hotel.nbVote == 0 }">
+							 	<c:set var="nbVote">1</c:set>
+							 </c:if>
+							 <c:if test="${ offres.get(0).chambre.hotel.nbVote != 0 }">
+							 	<c:set var="nbVote">${ offres.get(0).chambre.hotel.nbVote}</c:set>
+							 </c:if>
+							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: ${ (nbPerStar[4]/nbVote)*100 }%">
+								<span class="sr-only">80% Complete (danger)</span>
+							  </div>
+							</div>
+						</div>
+						<div class="pull-right" style="margin-left:10px;">${nbPerStar[4]}</div>
+					</div>
+					<div class="pull-left">
+						<div class="pull-left" style="width:35px; line-height:1;">
+							<div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+						</div>
+						<div class="pull-left" style="width:180px;">
+							<div class="progress" style="height:9px; margin:8px 0;">
+							  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: ${ (nbPerStar[3]/nbVote)*100 }%">
+								<span class="sr-only">80% Complete (danger)</span>
+							  </div>
+							</div>
+						</div>
+						<div class="pull-right" style="margin-left:10px;">${nbPerStar[3]}</div>
+					</div>
+					<div class="pull-left">
+						<div class="pull-left" style="width:35px; line-height:1;">
+							<div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+						</div>
+						<div class="pull-left" style="width:180px;">
+							<div class="progress" style="height:9px; margin:8px 0;">
+							  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: ${ (nbPerStar[2]/nbVote)*100 }%">
+								<span class="sr-only">80% Complete (danger)</span>
+							  </div>
+							</div>
+						</div>
+						<div class="pull-right" style="margin-left:10px;">${nbPerStar[2]}</div>
+					</div>
+					<div class="pull-left">
+						<div class="pull-left" style="width:35px; line-height:1;">
+							<div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+						</div>
+						<div class="pull-left" style="width:180px;">
+							<div class="progress" style="height:9px; margin:8px 0;">
+							  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: ${ (nbPerStar[1]/nbVote)*100 }%">
+								<span class="sr-only">80% Complete (danger)</span>
+							  </div>
+							</div>
+						</div>
+						<div class="pull-right" style="margin-left:10px;">${nbPerStar[1]}</div>
+					</div>
+					<div class="pull-left">
+						<div class="pull-left" style="width:35px; line-height:1;">
+							<div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+						</div>
+						<div class="pull-left" style="width:180px;">
+							<div class="progress" style="height:9px; margin:8px 0;">
+							  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: ${ (nbPerStar[0]/nbVote)*100 }%">
+								<span class="sr-only">80% Complete (danger)</span>
+							  </div>
+							</div>
+						</div>
+						<div class="pull-right" style="margin-left:10px;">${nbPerStar[0]}</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<ul class="services list-inline">
+			    		<c:if test="${offres.get(0).chambre.hotel.annulation==0}">
+			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check" ></i>Annulation gratuite</li>	
+			    		</c:if>
+			    		<c:if test="${offres.get(0).chambre.hotel.paiement eq false}">
+			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Paiement non pré-requis</li>	
+			    		</c:if>
+						<c:if test="${offres.get(0).chambre.hotel.parking}">
+			    			<li><i class="fa fa-check"></i>Parking</li>	
+			    		</c:if>
+			    		<c:if test="${offres.get(0).chambre.hotel.piscine!=0}">
+			    			<li><i class="fa fa-check"></i>Piscine ${offres.get(0).chambre.hotel.piscine} m<sup>2</sup></li>	
+			    		</c:if>
+						<c:if test="${offres.get(0).chambre.hotel.wifi eq true}">
+			    			<li><i class="fa fa-check"></i>Free Wifi</li>	
+			    		</c:if>
+						
+					</ul>
+					<ul class="services list-inline">
+						<li><i class="fa fa-lg fa-map-marker"></i>${offres.get(0).chambre.hotel.adresse_hotel}</li>
+					</ul>
+				</div>
+		    	
+			</div>
 	    </div>
 	    
 	</div>	
@@ -102,15 +183,15 @@
 		<form action="/reservation" method="get">
 	
 					<!-- Room Boxes -->
-					<div class="room-box clearfix">
-						<div class="img-container col-xs-6">
-							<img src="assets/img/rooms/grid/1.jpg" alt="1">
+					<div class="room-box clearfix"   >
+						<div class="img-container col-xs-6" style="height:320px">
+							<img src="${offre.chambre.photo}" alt="1">
 							<a href="#" class="btn btn-default" onclick="$(this).closest('form').submit()">Réservez</a>
 						</div>
-						<div class="details col-xs-6">
+						<div class="details col-xs-6" style="height:320px">
 							<div class="title"><a href="#"><span>Chambre </span> ${offre.chambre.categorie}</a></div>
 							<div class="desc">
-									${offre.chambre.description}
+									${fn:substring(offre.chambre.description,0,270)}
 								<ul class="facilities list-inline">
 									<c:if test="${offre.chambre.hotel.restaurant}">
 									<li><i class="fa fa-check"></i>Petit déjeuner inclus</li>
@@ -120,9 +201,9 @@
 									</c:if>
 									<li><i class="fa fa-check"></i>Taille  : ${offre.chambre.taille} m²</li>
 								</ul>
-								<label>nombre de chambres</label>
+								<label for="nbChambre">nombre de chambres</label>
 								<div class="field-container col-xs-6 col-md-4">
-						                <select name="nbChambre" placeholder="Nombre de chambres ?">
+						                <select id="nbChambre" name="nbChambre" placeholder="Nombre de chambres ?">
 						                   <c:forEach begin="1" end="${ nbChambres.get(offre.chambre.type) }" var="i">
 												<option><c:out value="${i}"></c:out></option>
 											</c:forEach>
@@ -165,7 +246,7 @@
 							<div class="comment-box-container">
 								<div class="comment-box">
 									<div class="user-img">
-										<img src="assets/img/staff/5.jpg" alt="">
+										<img src="assets/img/staff/user.png" alt="">
 									</div>
 									<div class="comment-info">
 										<div class="user-name">${comment.user.prenom} ${comment.user.nom}</div>

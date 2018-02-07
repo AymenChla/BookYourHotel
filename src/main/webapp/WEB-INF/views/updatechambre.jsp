@@ -166,7 +166,7 @@
                                     		<div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Type</label>
-                                                    <input type="text" name="type" value="${ chambre.categorie }" class="form-control" readonly="readonly" />
+                                                    <input type="text" name="type" value="${ chambre.type }" class="form-control" readonly="readonly" />
                                                 </div>
                                             </div>
                                     	</div>
@@ -201,7 +201,7 @@
                                             <div class="col-md-12">
                                                 <div class="">
                                                     <label class="control-label">Image de la chambre</label>
-                                                    <input type="file" name="newphoto" >
+                                                    <input type="file" name="image" >
                                                 </div>
                                             </div>
                                         </div>
@@ -214,9 +214,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card card-profile">
-                                <div class="card-avatar">
+                                <div class="">
                                     <a href="#pablo">
-                                        <img class="img" src="gerant/img/faces/marc.jpg" />
+                                        <img class="img" src="${ chambre.photo }" />
                                     </a>
                                 </div>
                                 <div class="content">

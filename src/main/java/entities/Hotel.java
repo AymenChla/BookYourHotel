@@ -3,11 +3,14 @@ package entities;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,11 +24,15 @@ public class Hotel{
     private String nom_hotel;
     private Integer nbEtoiles;
     private String adresse_hotel;
+    
+    @Column(name="piscine",nullable = false,columnDefinition = "int default 0")
     private Integer piscine;
     private boolean restaurant;
     private boolean parking;
     private boolean wifi;
 
+    @Lob
+    @Column(name="description_hotel", length=1000)
     private String description_hotel;
     private String image;
     private String numCarteBancaire;
@@ -35,15 +42,17 @@ public class Hotel{
     
     private int nbChambres = 0;
    
-    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Gerant> gerants;
-    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Rating> ratings;
-    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Commentaire> commentaires;
-    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="hotel",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Chambre> chambres;
 
+    private float avgRating = 0;
+    private int nbVote  =  0;
     
     
     public Hotel() {
@@ -86,6 +95,8 @@ public class Hotel{
 		this.paiement = hotel.isPaiement();
 		this.annulation = hotel.getAnnulation();
 		this.nbChambres = hotel.getNbChambres();
+		this.avgRating = hotel.getAvgRating();
+		this.nbVote = hotel.getNbEtoiles();
     }
 
     public Long getIdHotel() {
@@ -238,6 +249,27 @@ public class Hotel{
 
 	public void setNbChambres(int nbChambres) {
 		this.nbChambres = nbChambres;
+	}
+
+
+
+	public Float getAvgRating() {
+		return avgRating;
+	}
+
+
+	public void setAvgRating(Float avgRating) {
+		this.avgRating = avgRating;
+	}
+
+
+	public int getNbVote() {
+		return nbVote;
+	}
+
+
+	public void setNbVote(int nbVote) {
+		this.nbVote = nbVote;
 	}
     
     

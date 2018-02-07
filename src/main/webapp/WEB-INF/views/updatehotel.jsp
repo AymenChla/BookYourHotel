@@ -153,6 +153,7 @@
                                     <form action="/updateHotel" method="POST" enctype="multipart/form-data">
 	                                    <input type="hidden" name="idHotel" value="${ hotel.idHotel }" />
 										<input type="hidden" name="nbChambres" value="${ hotel.nbChambres }" />
+										<input type="hidden" name="image" value="${ hotel.image }" />
 		
                                         <div class="row">
                                             <div class="col-md-12">
@@ -235,7 +236,7 @@
                                                     <label>Description</label>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label"> </label>
-                                                        <textarea name="description" class="form-control" rows="3">${ hotel.description }</textarea>
+                                                        <textarea name="description_hotel" class="form-control" rows="3">${ hotel.description_hotel }</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,8 +250,11 @@
                                             </div>
                                         </div>
                                         <br>
+                                        <input type="hidden" name="avgRating" value="${hotel.avgRating}">
+                                        <input type="hidden" name="nbVote" value="${hotel.nbVote}">
                                         <button type="submit" class="btn btn-primary pull-right">Modifier</button>
-                                        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                                       
+                                        
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -258,15 +262,15 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card card-profile">
-                                <div class="card-avatar">
+                                <div class="">
                                     <a href="#pablo">
-                                        <img class="img" src="gerant/img/faces/marc.jpg" />
+                                        <img class="img" src="${hotel.image }" />
                                     </a>
                                 </div>
                                 <div class="content">
                                     <h4 class="card-title">${ hotel.nom_hotel }</h4>
                                     <p class="card-content">
-                                        ${ hotel.description }
+                                        ${ hotel.description_hotel }
                                     </p>
                                 </div>
                             </div>

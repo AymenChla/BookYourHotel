@@ -143,7 +143,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
                                     <h4 class="title">Ajouter des nouveaux prix</h4>
@@ -194,21 +194,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-profile">
-                                <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img" src="gerant/img/faces/marc.jpg" />
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h4 class="card-title">${ hotel.nom_hotel }</h4>
-                                    <p class="card-content">
-                                        ${ hotel.description }
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>

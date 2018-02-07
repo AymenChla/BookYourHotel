@@ -13952,7 +13952,20 @@ body.sticky #main-header.sticky {
       -ms-transform: translateX(-50%) translateY(-50%);
       -webkit-transform: translateX(-50%) translateY(-50%);
       transform: translateX(-50%) translateY(-50%); }
-    #luxury-rooms .room-boxes .room-details, #special-dishes .room-boxes .room-details, #luxury-rooms .room-boxes .package-details, #special-dishes .room-boxes .package-details, #luxury-rooms .package-boxes .room-details, #special-dishes .package-boxes .room-details, #luxury-rooms .package-boxes .package-details, #special-dishes .package-boxes .package-details, #special-packages-type-2 .room-boxes .room-details, #special-packages-type-2 .room-boxes .package-details, #special-packages-type-2 .package-boxes .room-details, #special-packages-type-2 .package-boxes .package-details {
+      #luxury-rooms .room-boxes .room-details{
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      color: #FFFFFF;
+      padding: 80px 30px 30px;
+      height: 100%;
+      z-index: 1;
+      -webkit-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      transition: all 1s ease; 
+      }
+    #special-dishes .room-boxes .room-details, #luxury-rooms .room-boxes .package-details, #special-dishes .room-boxes .package-details, #luxury-rooms .package-boxes .room-details, #special-dishes .package-boxes .room-details, #luxury-rooms .package-boxes .package-details, #special-dishes .package-boxes .package-details, #special-packages-type-2 .room-boxes .room-details, #special-packages-type-2 .room-boxes .package-details, #special-packages-type-2 .package-boxes .room-details, #special-packages-type-2 .package-boxes .package-details {
       position: absolute;
       left: 0;
       top: 0;

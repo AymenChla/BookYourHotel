@@ -65,9 +65,9 @@
 						</c:otherwise>
 					</c:choose>
 					
-					<img src="../assets/img/packages/1.jpg" alt="King Suit" class="package-img"><!-- package Image -->
+					<img src="${reservation.chambre.photo}" alt="King Suit" class="package-img"><!-- package Image -->
 					<div class="package-details col-md-6 col-lg-4">
-						<div class="title">Hôtel ${reservation.chambre.hotel.nom_hotel}</div><!-- package title -->
+						<div class="title">${reservation.chambre.hotel.nom_hotel}</div><!-- package title -->
 						<h4 class="title"><small>Chambre ${reservation.chambre.categorie}</small></h4>
 
 						<!--<div style="color: #c5a46c;"><b><i class="fa fa-map-marker"></i> ${reservation.chambre.hotel.adresse_hotel}</b></div>-->

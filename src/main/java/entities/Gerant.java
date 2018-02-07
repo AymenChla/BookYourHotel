@@ -33,6 +33,7 @@ public class Gerant extends User{
     private Hotel hotel;
 
     public Gerant() {
+    	this.setRole("ROLE_GERANT");
     }
 
     public Gerant(String nom, String prenom, String cin, Date date_naissance, String sexe, String tel, String adresse, String email, String username, String password) {
@@ -44,6 +45,7 @@ public class Gerant extends User{
         this.sexe = sexe;
         this.tel = tel;
         this.adresse = adresse;
+        this.setRole("ROLE_GERANT");
     }
 
     public String getNom() {

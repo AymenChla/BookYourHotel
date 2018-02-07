@@ -29,7 +29,7 @@
 		<h1>Réservation de <span>Chambre</span></h1>
 		<ol class="breadcrumb"><!-- Internal Page Breadcrumb -->
             <li><a href="/">Accueil</a></li>
-             <li>Hôtel ${offre.chambre.hotel.nom_hotel}</li>
+             <li>${offre.chambre.hotel.nom_hotel}</li>
              <li>Chambre ${offre.chambre.categorie}</li>
              <li class="active">Paiement</li>
         </ol>
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 					<div class="reservation-info col-md-4">
-						<h4>Infos <b>Résident</b></h4>
+						<h4>Infos <b>Client</b></h4>
 						<div class="">
 							<ul>
 								<li>

@@ -11,9 +11,10 @@
 	<form action="/createhotel" method="POST">
 		nom <input type="text" name="nom_hotel" required/>
 		nb etoiles <input type="text" name="nbEtoiles" required/>
-		numCarteBancaire <input type="text" name="numCarteBancaire" required/><br/>
+		numCarteBancaire <input type="text" name="numCarteBancaire"/><br/>
 		
 		email <input type="text" name="email"/>
+		username <input type="text" name="userName" required />
 		password <input type="password" name="password" required/>
 		nom <input type="text" name="nom" required/>
 		prenom <input type="text" name="prenom" required/>

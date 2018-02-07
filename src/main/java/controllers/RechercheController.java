@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,12 +91,21 @@ public class RechercheController {
 		List<Commentaire> commentaires = commentaireRepository.getAllByHotel(id_hotel);
 		model.put("commentaires", commentaires);
 		
-		//rating
-		Float avgRating = ratingRepository.getAvgRatingByHotel(id_hotel);
-		if(avgRating==null) avgRating = new Float(0);
-		model.put("avgRating",avgRating);
 		
 		
+		
+		Long[] nbPerStar = new Long[5];
+		for(int i=0; i < 5 ; i++)
+		{
+			Long var = ratingRepository.getHowManyRatedFor(i+1, id_hotel);
+			if(var != null)
+			{
+				nbPerStar[i] = var;
+			}
+			else nbPerStar[i] = new Long(0);
+		}
+		
+		model.put("nbPerStar", nbPerStar);
 		
 		return "hebergements";
 	}
@@ -129,13 +139,18 @@ public class RechercheController {
 		List<Commentaire> commentaires = commentaireRepository.getAllByHotel(id_hotel);
 		model.put("commentaires", commentaires);
 		
-		//rating
-		Float avgRating = ratingRepository.getAvgRatingByHotel(id_hotel);
-		if(avgRating==null) avgRating = new Float(0);
-		model.put("avgRating",avgRating);
+	
 		
-		
-		
+		Long[] nbPerStar = new Long[5];
+		for(int i=0; i < 5 ; i++)
+		{
+			Long var = ratingRepository.getHowManyRatedFor(i+1, id_hotel);
+			if(var != null)
+			{
+				nbPerStar[i] = var;
+			}
+			else nbPerStar[i] = new Long(0);
+		}
 		
 		return "hebergements";
 	}

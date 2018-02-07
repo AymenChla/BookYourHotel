@@ -26,7 +26,7 @@
 			    	<tr>
 						<td>${hotel.nom_hotel}</td>
 				    	<td>${hotel.nbEtoiles}</td>
-				   		<td>${hotel.description}</td>
+				   		<td>${hotel.description_hotel}</td>
 				   		<td><input type="checkbox" name="hotels" value="${hotel.idHotel}" />Delete</a></td>
 			    	</tr>
 				</c:forEach>

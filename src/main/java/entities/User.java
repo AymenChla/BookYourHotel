@@ -35,7 +35,7 @@ public class User implements Serializable {
 	@Column(name="dateAjout",nullable = false, columnDefinition="datetime default CURRENT_TIMESTAMP")
     private Date dateAjout = new Date();
     
-    @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Commentaire> commentaires;
 
     private String role;

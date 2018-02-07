@@ -17,6 +17,7 @@
     <link href="gerant/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="gerant/css/demo.css" rel="stylesheet" />
+    <link href="datatables/datatables.min.css" rel="stylesheet">
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
@@ -150,7 +151,7 @@
                                     <h4 class="title">Liste des prix par période</h4>
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table class="table">
+                                    <table class="table" id="myTable">
                                         <thead class="text-primary">
 								    		<th>Type</th>
 								    		<th>Date Début</th>
@@ -229,7 +230,14 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Material Dashboard javascript methods -->
 <script src="gerant/js/material-dashboard.js?v=1.2.0"></script>
+<script src="datatables/datatables.min.js"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="gerant/js/demo.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
 
 </html>

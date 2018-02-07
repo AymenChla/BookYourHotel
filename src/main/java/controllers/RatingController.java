@@ -78,17 +78,32 @@ public class RatingController {
 			rate = new Rating();
 			rate.setClient(client); 
 			rate.setHotel(hotel);
+			rate.getHotel().setNbVote(rate.getHotel().getNbVote()+1);
 		}
+		
 		
 		rate.setNbEtoiles(s);
 		ratingRepository.save(rate);
 		
-		
 		//rating
 		Float avgRating = ratingRepository.getAvgRatingByHotel(id_hotel);
 		if(avgRating==null) avgRating = new Float(0);
-		model.put("avgRating",avgRating);
-				
+		rate.getHotel().setAvgRating(avgRating);
+		ratingRepository.save(rate);
+		
+		
+		Long[] nbPerStar = new Long[5];
+		for(int i=0; i < 5 ; i++)
+		{
+			Long var = ratingRepository.getHowManyRatedFor(i+1, id_hotel);
+			if(var != null)
+			{
+				nbPerStar[i] = var;
+			}
+			else nbPerStar[i] = new Long(0);
+		}
+		model.put("nbPerStar", nbPerStar);
+		
 		return "hebergements";
 	}
 }

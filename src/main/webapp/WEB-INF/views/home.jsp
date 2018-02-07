@@ -128,11 +128,31 @@
 						</c:otherwise>
 					</c:choose>
 					
-						<img src="assets/img/rooms/1.jpg" alt="King Suit" class="room-img"><!-- Room Image -->
-						<div class="room-details col-xs-6 col-md-4">
-							<div class="title">Hôtel ${offre.chambre.hotel.nom_hotel}</div><!-- Room title -->
+						<img src="${ offre.chambre.hotel.image }" alt="King Suit" class="room-img"><!-- Room Image -->
+						<div class="room-details col-xs-6 col-md-4" >
+							<div class="title">${offre.chambre.hotel.nom_hotel}</div><!-- Room title -->
 							<div class="description"><!-- Room Description -->
 								${offre.chambre.hotel.description_hotel}
+							</div>
+							<div class="description">
+								<h4 class="text-warning" style="font-weight:bold">Rating ${ offre.chambre.hotel.avgRating }
+								<i class="fa fa-star"></i></h4>
+							
+								<c:if test="${ offre.chambre.hotel.annulation == 0}">
+									
+										<h5 class="text-success" style="font-weight:bold">Annulation gratuite</h5>
+									
+								</c:if>
+								<c:if test="${ offre.chambre.hotel.paiement eq true}">
+									
+										<h5 class="text-success" style="font-weight:bold">Prépaiement requis</h5>
+									
+								</c:if>
+								<c:if test="${ offre.chambre.hotel.paiement eq false}">
+									
+										<h5 class="text-success" style="font-weight:bold" >Prépaiement non requis</h5>
+									
+								</c:if>
 							</div>
 							<form action="/hebergements" method="POST">
 								<input type="hidden" name="id_hotel" value="<c:out value="${ offre.chambre.hotel.idHotel}"></c:out>">
@@ -140,7 +160,9 @@
 							</form>
 						</div>
 						<div class="price-container col-xs-6 col-md-8">
+							
 							<div class="price">
+								<span>Chambre ${ offre.chambre.categorie }</span>
 								<span>${offre.prix} MAD</span>
 								- Par Nuit
 							</div>

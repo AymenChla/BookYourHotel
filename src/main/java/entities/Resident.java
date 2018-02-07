@@ -4,6 +4,7 @@ package entities;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Resident {
     private Date dateNaissance;
     private String adresse;
     
-    @OneToMany(mappedBy="resident",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="resident",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Collection<Reservation> reservations;
 
     public Resident() {

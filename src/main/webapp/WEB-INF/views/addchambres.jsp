@@ -49,13 +49,13 @@
                             <p>Hôtel</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="/createGerant">
                             <i class="material-icons">person</i>
                             <p>Nouveau Gérant</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/chambres">
                             <i class="material-icons">hotel</i>
                             <p>Chambres</p>
@@ -143,7 +143,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
                                     <h4 class="title">Ajouter des nouveaux chambres</h4>
@@ -199,6 +199,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="">
+                                                    <label class="control-label">Image de la chambre</label>
+                                                    <input type="file" name="image" >
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button type="submit" class="btn btn-primary pull-right">Ajouter</button>
                                         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                                         <div class="clearfix"></div>
@@ -206,21 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-profile">
-                                <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img" src="gerant/img/faces/marc.jpg" />
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h4 class="card-title">${ hotel.nom_hotel }</h4>
-                                    <p class="card-content">
-                                        ${ hotel.description }
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
