@@ -58,20 +58,20 @@
 					<h2><small>Cherchez une</small><span> Chambre</span></h2>
 					<form class="booking-form clearfix" action="rechercheOffres#luxury-rooms" method="post"><!-- Do Not remove the classes -->
 						<div class="booking-fields col-xs-6 col-md-12">
-							<input type="text" name="dest" placeholder="votre destination ?">
+							<input type="text" name="dest" placeholder="votre destination ?" value="${sessionScope.destination }">
 						</div>
 						<div class="input-daterange clearfix">
 				            <div class="booking-fields col-xs-6 col-md-12">
-				                <input placeholder="Date début séjour" class="datepicker-fields check-in" type="text" name="date_debut" /><!-- Date Picker field ( Do Not remove the "datepicker-fields" class ) -->
+				                <input value="${sessionScope.date_d }" placeholder="Date début séjour" class="datepicker-fields check-in" type="text" name="date_debut" /><!-- Date Picker field ( Do Not remove the "datepicker-fields" class ) -->
 				                <i class="fa fa-calendar"></i><!-- Date Picker Icon -->
 				            </div>
 				            <div class="booking-fields col-xs-6 col-md-12">
-				                <input placeholder="Date fin séjour" class="datepicker-fields check-out" type="text" name="date_fin" />
+				                <input value="${sessionScope.date_f }" placeholder="Date fin séjour" class="datepicker-fields check-out" type="text" name="date_fin" />
 				                <i class="fa fa-calendar"></i>
 				            </div>
 				        </div>
 				        <div class="booking-fields col-xs-6 col-md-12">
-				        	<input type="text" name="nbChambre" placeholder="nombre de chambres ?">
+				        	<input value="${sessionScope.nbChambre }" type="text" name="nbChambre" placeholder="nombre de chambres ?">
 				        </div>
 			            <!-- <div class="booking-fields col-xs-6 col-md-12">
 			                <select name="room-type">

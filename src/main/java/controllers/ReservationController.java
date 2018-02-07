@@ -54,6 +54,9 @@ public class ReservationController {
 	@RequestMapping(value="/reservation")
 	public String BeforeReservation(HttpServletRequest request,ModelMap model, Integer type ,Integer nbChambre,Long id_offre)
 	{
+		if(type == null || nbChambre == null || id_offre == null)
+			return "redirect:/hebergements";
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("type", type);
 		session.setAttribute("nbChambre", nbChambre);
@@ -68,6 +71,12 @@ public class ReservationController {
 		return "reservation";
 	}
 	
+	@RequestMapping(value="/n_reservation" , method = RequestMethod.GET)
+	public String viewNReservation()
+	{
+		return "redirect:reservation";
+	}
+	
 	@RequestMapping(value="/n_reservation" , method = RequestMethod.POST)
 	public String Reservation(HttpServletRequest request,ModelMap model,Resident resident,String type_resident) throws ParseException
 	{
@@ -77,7 +86,6 @@ public class ReservationController {
 		Integer type= (Integer) session.getAttribute("type");
 		String date_d = (String) session.getAttribute("date_d");
 		String date_f = (String) session.getAttribute("date_f");
-		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date_debut_sejour = formatter.parse(date_d);
 		Date date_fin_sejour = formatter.parse(date_f);
@@ -156,11 +164,13 @@ public class ReservationController {
 		return "redirect:mesreservations";
 	}
 	
+	
 	@RequestMapping(value="/reglerpaiement",method= RequestMethod.GET)
-	public String viewReglerPaiement()
+	public String ViewReglerPaiement(ModelMap model)
 	{
-		return "reglerpaiement";
+		return "redirect:/n_reservation";
 	}
+	
 	
 	@RequestMapping(value="/reglerpaiement",method= RequestMethod.POST)
 	public String reglerPaiement(ModelMap model, HttpServletRequest request )
@@ -178,8 +188,10 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value="/paiement",method= RequestMethod.GET)
-	public String viewReglerPaiement(ModelMap model,Long id)
+	public String viewPaiement(ModelMap model,Long id)
 	{
+		if(id == null)
+			return "redirect:/reservation";
 		
 		Reservation reservation = reservationRepository.getOne(id);
 		model.put("montant",reservation.getPrix_reservation());
@@ -189,11 +201,14 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value="/paiement",method= RequestMethod.POST)
-	public String reglerPaiement(ModelMap model,Long id_reservation)
+	public String paiement(ModelMap model,Long id_reservation)
 	{
+		if(id_reservation == null)
+			return "redirect:/paiement";
 		
 		Reservation reservation = reservationRepository.getOne(id_reservation);
 		reservation.setPayer(true);
+		reservationRepository.save(reservation);
 		
 		return "redirect:/mesreservations";
 	}

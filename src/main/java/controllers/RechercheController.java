@@ -55,13 +55,23 @@ public class RechercheController {
 		
 		List<Prix> offres =  prixRepository.getAllAvailableOffers(dest, date_debut, date_fin,nbChambre);
 		offres = Prix.supprimerDoublonsHotel(offres);
-		model.put("offres",offres);
 		
+		
+		session.setAttribute("destination",dest);
 		session.setAttribute("date_d", date_debut);
 		session.setAttribute("date_f", date_fin);
+		session.setAttribute("nbChambre", nbChambre);
+		session.setAttribute("offres", offres);
 		
 		return "home";
 	}
+	
+	@RequestMapping(value="/rechercheOffres",method=RequestMethod.GET)
+	public String viewRechercheOffres(HttpServletRequest request,ModelMap model)
+	{	
+		return "home";
+	}
+	
 	
 	@RequestMapping(value="/hebergements",method=RequestMethod.POST)
 	public String hebergements(HttpServletRequest request,ModelMap model,@RequestParam Long id_hotel)
@@ -151,6 +161,8 @@ public class RechercheController {
 			}
 			else nbPerStar[i] = new Long(0);
 		}
+		
+		model.put("nbPerStar", nbPerStar);
 		
 		return "hebergements";
 	}

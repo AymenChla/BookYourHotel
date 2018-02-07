@@ -155,13 +155,13 @@
 			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Paiement non pré-requis</li>	
 			    		</c:if>
 						<c:if test="${offres.get(0).chambre.hotel.parking}">
-			    			<li><i class="fa fa-check"></i>Parking</li>	
+			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Parking</li>	
 			    		</c:if>
 			    		<c:if test="${offres.get(0).chambre.hotel.piscine!=0}">
-			    			<li><i class="fa fa-check"></i>Piscine ${offres.get(0).chambre.hotel.piscine} m<sup>2</sup></li>	
+			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Piscine ${offres.get(0).chambre.hotel.piscine} m<sup>2</sup></li>	
 			    		</c:if>
 						<c:if test="${offres.get(0).chambre.hotel.wifi eq true}">
-			    			<li><i class="fa fa-check"></i>Free Wifi</li>	
+			    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Free Wifi</li>	
 			    		</c:if>
 						
 					</ul>
@@ -184,22 +184,25 @@
 	
 					<!-- Room Boxes -->
 					<div class="room-box clearfix"   >
-						<div class="img-container col-xs-6" style="height:320px">
+						<div class="img-container col-xs-5" style="height:340px">
 							<img src="${offre.chambre.photo}" alt="1">
-							<a href="#" class="btn btn-default" onclick="$(this).closest('form').submit()">Réservez</a>
+							<a href="#" class="btn btn-default" onclick="$(this).closest('form').submit()">Réserver</a>
 						</div>
-						<div class="details col-xs-6" style="height:320px">
+						<div class="details col-xs-7" style="height:340px">
 							<div class="title"><a href="#"><span>Chambre </span> ${offre.chambre.categorie}</a></div>
 							<div class="desc">
 									${fn:substring(offre.chambre.description,0,270)}
 								<ul class="facilities list-inline">
-									<c:if test="${offre.chambre.hotel.restaurant}">
-									<li><i class="fa fa-check"></i>Petit déjeuner inclus</li>
-									</c:if>
 									<c:if test="${offre.chambre.hotel.wifi}">
-										<li><i class="fa fa-check"></i>Wifi Gratuit</li>
+										<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Wifi Gratuit</li>
 									</c:if>
-									<li><i class="fa fa-check"></i>Taille  : ${offre.chambre.taille} m²</li>
+						    		<c:if test="${offre.chambre.climatisation}">
+						    			<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Climatisation</li>	
+						    		</c:if>
+									<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Taille  : ${offre.chambre.taille} m²</li>
+									<c:if test="${offre.chambre.hotel.restaurant}">
+									<li style="font-weight:bold" class="text-success"><i class="fa fa-check"></i>Petit déjeuner inclus</li>
+									</c:if>
 								</ul>
 								<label for="nbChambre">nombre de chambres</label>
 								<div class="field-container col-xs-6 col-md-4">
