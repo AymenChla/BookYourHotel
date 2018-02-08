@@ -59,6 +59,7 @@ public class Chambre{
 		this.climatisation = chambre.getClimatisation();
 		this.description = chambre.getDescription();
 		this.hotel = chambre.getHotel();
+		this.photo = chambre.getPhoto();
 	}
 
 	public Integer getNumero() {

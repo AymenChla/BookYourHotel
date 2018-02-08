@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ChambreRepository;
+import dao.CommentaireRepository;
 import dao.HotelRepository;
 import dao.PrixRepository;
 import dao.RatingRepository;
 import dao.UserRepository;
 import entities.Client;
+import entities.Commentaire;
 import entities.Hotel;
 import entities.Prix;
 import entities.Rating;
@@ -40,6 +42,9 @@ public class RatingController {
 	
 	@Autowired
 	private RatingRepository ratingRepository;
+	
+	@Autowired
+	private CommentaireRepository commentaireRepository;
 	
 	@RequestMapping(value="/rating", method=RequestMethod.GET)
 	public String rate(HttpServletRequest request,ModelMap model,Integer s)
@@ -104,6 +109,10 @@ public class RatingController {
 		}
 		model.put("nbPerStar", nbPerStar);
 		
+		//commentaire
+		List<Commentaire> commentaires = commentaireRepository.getAllByHotel(id_hotel);
+		model.put("commentaires", commentaires);
+				
 		return "hebergements";
 	}
 }
